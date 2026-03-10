@@ -1,0 +1,86 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto velit repudiandae quos suscipit distinctio magni nostrum nam. Reiciendis incidunt inventore beatae labore sint nobis rem quam dignissimos iure harum itaque a, accusamus optio, quos accusantium veniam soluta! Pariatur, dolore sequi ducimus, fugit blanditiis cum deserunt exercitationem optio est natus facere asperiores hic animi voluptatibus non eius aut, explicabo quod itaque vero ratione iste voluptates praesentium. Libero necessitatibus labore fuga atque ratione suscipit, laudantium voluptatum minima in excepturi enim minus numquam placeat explicabo fugiat illo autem aliquam deleniti odit obcaecati. Commodi, ipsam praesentium omnis maxime dolore placeat voluptatibus autem possimus dolorem natus repudiandae architecto enim eaque quo qui ea excepturi iste magnam voluptatem sit delectus. Eum accusantium unde, minus, deserunt doloremque inventore, deleniti quisquam vel maxime dolore ab culpa a doloribus earum. Consectetur vitae enim saepe architecto culpa aperiam laboriosam vel inventore nulla mollitia, commodi cum soluta libero sed provident voluptatibus non cupiditate fugit? Quae aliquid aliquam saepe? Est pariatur nemo ex eligendi earum harum accusantium culpa odit repudiandae id. Eligendi deleniti expedita hic perferendis perspiciatis nihil, in, corporis optio odit commodi rerum pariatur delectus nisi unde assumenda suscipit ex veritatis id saepe alias nobis, et quis. Quis quibusdam officia ducimus?
+</body>
+</html><h1>Hello Vijay how are you</h1><h1>Hello Vijay how are you</h1> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Premium Profile Hover</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top, #1e1e2f, #0f0f18);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Profile container */
+        .profile-wrapper {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            transition: box-shadow 0.5s ease;
+        }
+
+        /* Glow ring */
+        .profile-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00f5ff, #ff00c8);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        /* Image */
+        .profile-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition:
+                transform 0.8s cubic-bezier(.19,1,.22,1),
+                filter 0.6s ease;
+        }
+
+        /* Hover effects */
+        .profile-wrapper:hover {
+            box-shadow: 0 25px 60px rgba(0, 245, 255, 0.45);
+        }
+
+        .profile-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        .profile-wrapper:hover img {
+            transform: scale(1.35);
+            filter: blur(1px) brightness(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-wrapper">
+        <img src="https://i.pravatar.cc/400" alt="Profile Image">
+    </div>
+
+</body>
+</html>
