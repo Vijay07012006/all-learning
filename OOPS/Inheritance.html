@@ -1,0 +1,38 @@
+<!-- Inheritance  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+</head>
+
+<body>
+
+    <script>
+        class Fruit {
+            name; 
+            color;
+            shape;
+        }
+        class Apple extends Fruit{ // 
+            constructor(name , color , shape){
+                super() // parent constructor call
+                this.name=name;
+                this.color=color;
+                this.shape=shape;
+            }
+            fun(){
+                console.log("Name of fruit is : ",this.name);
+                console.log("Color of fruit is : ",this.color);
+                console.log("Shape of fruit is : ",this.shape);    
+            }
+        }
+        let a = new Apple("Apple" , "red" , "circle");
+        a.fun();
+       
+    </script>
+</body>
+
+</html>

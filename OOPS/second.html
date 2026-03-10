@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // class Employee{
+        //     #sal;
+        //     constructor(id, name , sal){
+        //         this.id = id;
+        //         this.name = name;
+        //         this.#sal = sal;
+        //     }
+        //     details(){
+        //         console.log(this.id);
+        //         console.log(this.name);
+        //         console.log(this.#sal);        
+        //     }
+        // }
+
+        // class Manager extends Employee{
+        //     details(){
+        //         super.details(); // 
+        //         console.log('*****');
+                
+        //     }
+        // }
+        // obj = new Employee(101 , "Vijay" , 150000);
+        // obj2 = new Manager(102 , "AJAY" , 50000);
+        // obj.name = 'ajay';
+        // obj.details();
+        // obj2.details();
+
+        class User{
+            constructor(name , age){
+                this.name = name;
+                this.age = age;
+            }
+            show(){
+                console.log(`Name : ${this.name} , Age : ${this.age}`);
+            }
+        }
+        class Admin extends User{
+            constructor(name , age , role){
+                super(name , age);
+                this.role = role;
+            }
+            show(){
+                super.show();
+                console.log(`Role : ${this.role}`);
+            }
+        }
+        let user1 = new User("Vijay" , 20);
+        user1.show();
+        let user2 = new Admin("Vijay " ,20 , 'Student');
+        user2.show();
+    </script>
+</body>
+</html>

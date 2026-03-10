@@ -1,0 +1,388 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextToVoiceConverter</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="box">
+        <input type="text" name="" id="">
+        <button onclick="convert()">Convert</button>
+        <button onclick="convrt()" id="text_convert">Voice to text</button>
+        <p id="words"></p>
+
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice Converter Pro</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -250px;
+    right: -250px;
+    animation: float 6s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    bottom: -200px;
+    left: -200px;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.header p {
+    color: #666;
+    font-size: 14px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+.output-box {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 120px;
+    margin-top: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.output-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+    background-size: 300% 100%;
+    animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.output-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#words {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.icon {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 40px 25px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .header h1 {
+        font-size: 26px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🎙️ Voice Converter Pro</h1>
+        <p>Transform text to speech and speech to text</p>
+    </div>
+    
+    <div class="input-group">
+        <input type="text" id="textInput" placeholder="Enter text to convert to speech...">
+    </div>
+    
+    <div class="btn-group">
+        <button class="btn btn-primary" onclick="textToSpeech()">
+            <span class="icon">🔊</span>Text to Speech
+        </button>
+    </div>
+    
+    <div class="btn-group">
+        <button class="btn btn-secondary" onclick="speechToText()">
+            <span class="icon">🎤</span>Speech to Text
+        </button>
+    </div>
+    
+    <div class="output-box">
+        <div class="output-label">Transcribed Text</div>
+        <p id="words">Your spoken words will appear here...</p>
+    </div>
+</div>
+
+<script>
+let recognition = null;
+let isRecording = false;
+
+function textToSpeech() {
+    const input = document.getElementById('textInput');
+    let text = input.value.trim();
+    
+    if (text === "") {
+        alert("⚠️ Please enter some text to convert!");
+        return;
+    }
+    
+    speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    utterance.lang = 'en-US';
+    
+    utterance.onstart = function() {
+        document.getElementById('words').innerHTML = '<span class="pulse">🔊 Speaking...</span>';
+    };
+    
+    utterance.onend = function() {
+        document.getElementById('words').innerHTML = 'Speech completed!';
+    };
+    
+    speechSynthesis.speak(utterance);
+}
+
+function speechToText() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+        alert("⚠️ Your browser doesn't support Speech Recognition!");
+        return;
+    }
+    
+    if (isRecording && recognition) {
+        recognition.stop();
+        isRecording = false;
+        return;
+    }
+    
+    recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = true;
+    recognition.continuous = true;
+    
+    recognition.onstart = function() {
+        isRecording = true;
+        document.getElementById('words').innerHTML = '<span class="pulse">🎤 Listening...</span>';
+    };
+    
+    recognition.onresult = function(event) {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+        }
+        document.getElementById('words').innerHTML = transcript;
+    };
+    
+    recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+        document.getElementById('words').innerHTML = '❌ Error: ' + event.error;
+        isRecording = false;
+    };
+    
+    recognition.onend = function() {
+        isRecording = false;
+    };
+    
+    recognition.start();
+}
+</script>
+</body>
+</html>

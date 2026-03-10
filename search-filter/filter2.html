@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Filter Example</title>
+    <style>
+        .outer {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .box {
+            height: 120px;
+            width: 120px;
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: transform .15s ease, opacity .15s ease;
+            background: #fff;
+        }
+
+        .filter {
+            height: 50px;
+            width: 500px;
+            margin: 24px auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .cat {
+            cursor: pointer;
+            user-select: none;
+            padding: 6px 10px;
+            border: 1px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+        }
+
+        .cat.active {
+            background: #222;
+            color: #fff;
+        }
+
+        .hide {
+            display: none !important;
+            opacity: 0;
+            transform: scale(.95);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="filter">
+        <!-- pass strings to fun -->
+        <div class="cat active" onclick="fun('ALL', this)">ALL</div>
+        <div class="cat" onclick="fun('A', this)">A</div>
+        <div class="cat" onclick="fun('B', this)">B</div>
+        <div class="cat" onclick="fun('C', this)">C</div>
+        <div class="cat" onclick="fun('D', this)">D</div>
+        <div class="cat" onclick="fun('E', this)">E</div>
+        <div class="cat" onclick="fun('F', this)">F</div>
+    </div>
+
+    <div class="outer">
+        <!-- give each box a data-cat attribute so matching is explicit -->
+        <div class="box" data-cat="A" style="background-color: red;">A</div>
+        <div class="box" data-cat="B"  style="background-color: rgb(134, 81, 81);">B</div>
+        <div class="box" data-cat="C"  style="background-color: rgb(1, 51, 121);">C</div>
+        <div class="box" data-cat="D"  style="background-color: rgb(87, 5, 94);">D</div>
+        <div class="box" data-cat="E"  style="background-color: rgb(222, 147, 55);">E</div>
+        <div class="box" data-cat="F"  style="background-color: rgb(106, 51, 4);">F</div>
+    </div>
+
+    <script>
+        function fun(category, clickedEl) {
+            const boxes = document.getElementsByClassName('box');
+
+            // update active class on filter buttons (clickedEl provided)
+            document.querySelectorAll('.cat').forEach(c => c.classList.remove('active'));
+            if (clickedEl) clickedEl.classList.add('active');
+
+            if (category === 'ALL') {
+                // show all
+                for (let i = 0; i < boxes.length; i++) {
+                    boxes[i].classList.remove('hide');
+                }
+                return;
+            }
+            // show only the ones matching the category, hide the rest
+            for (let i = 0; i < boxes.length; i++) {
+                const box = boxes[i];
+                const boxCat = box.getAttribute('data-cat') || box.textContent.trim();
+                if (boxCat === category) {
+                    box.classList.remove('hide');
+                } else {
+                    box.classList.add('hide');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

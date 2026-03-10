@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABSTRACTION</title>
+</head>
+
+<body>
+    <script>
+        class ATM {
+            withdraw(amount) {
+                this.#process(amount);
+            }
+
+            #process(amount) {
+                console.log(amount + " withdrawn");
+            }
+        }
+
+        let atm = new ATM();
+        atm.withdraw(500);
+        // atm.#process(500); ❌ ERROR (private method)
+
+        // ✔ # → private (ES2022 feature)
+    </script>
+</body>
+
+</html>

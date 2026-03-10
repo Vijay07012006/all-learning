@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Filter Example</title>
+    <style>
+        .outer {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .box {
+            height: 120px;
+            width: 120px;
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: transform .15s ease, opacity .15s ease;
+            background: #fff;
+        }
+
+        .filter {
+            height: 50px;
+            width: 500px;
+            margin: 24px auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .cat {
+            cursor: pointer;
+            padding: 6px 10px;
+            border: 1px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+        } 
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="filter">
+        <div class="cat" onclick="fun('ALL')">ALL</div>
+        <div class="cat" onclick="fun('A')">A</div>
+        <div class="cat" onclick="fun('B')">B</div>
+        <div class="cat" onclick="fun('C')">C</div>
+        <div class="cat" onclick="fun('D')">D</div>
+        <div class="cat" onclick="fun('E')">E</div>
+        <div class="cat" onclick="fun('F')">F</div>
+    </div>
+    <div class="outer">
+        <div class="box A"  style="background-color: red;">A</div>
+        <div class="box B"   style="background-color: rgb(134, 81, 81);">B</div>
+        <div class="box C"   style="background-color: rgb(1, 51, 121);">C</div>
+        <div class="box D"   style="background-color: rgb(87, 5, 94);">D</div>
+        <div class="box E"   style="background-color: rgb(222, 147, 55);">E</div>
+        <div class="box F"   style="background-color: rgb(106, 51, 4);">F</div>
+    </div>
+
+    <script>
+        
+        function fun(a){
+            const b = document.getElementsByClassName('box');
+            if(a=='ALL'){
+                //handle for showing all elements
+            }
+            else if(a=='A'){
+                for(let i=0; i<b.length ; i++){
+                    if(!(b[i].classList[1]=='A')){
+                        b[i].classList.add('hide');
+                    }
+                    else{
+                        b[i].classList.remove('hide');
+                    }
+                }
+            }
+            else if(a=='B'){
+                for(let i=0; i<b.length ; i++){
+                    if(!(b[i].classList[1]=='B')){
+                        b[i].classList.add('hide');
+                    }
+                    else{
+                        b[i].classList.remove('hide');
+                    }
+                }
+            }
+            else if(a=='C'){
+                for(let i=0; i<b.length ; i++){
+                    if(!(b[i].classList[1]=='C')){
+                        b[i].classList.add('hide');
+                    }
+                    else{
+                        b[i].classList.remove('hide');
+                    }
+                }
+            }
+            else if(a=='D'){
+                for(let i=0; i<b.length ; i++){
+                    if(!(b[i].classList[1]=='D')){
+                        b[i].classList.add('hide');
+                    }
+                    else{
+                        b[i].classList.remove('hide');
+                    }
+                }
+            }
+            else if(a=='E'){
+                for(let i=0; i<b.length ; i++){
+                    if(!(b[i].classList[1]=='E')){
+                        b[i].classList.add('hide');
+                    }
+                    else{
+                        b[i].classList.remove('hide');
+                    }
+                }
+            }
+            else if(a=='F'){
+                for(let i=0; i<b.length ; i++){
+                    if(!(b[i].classList[1]=='F')){
+                        b[i].classList.add('hide');
+                    }
+                    else{
+                        b[i].classList.remove('hide');
+                    }
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>

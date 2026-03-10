@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // Object destructuring
+        const person = {
+            name: 'Alice',
+            age: 30,
+            city: 'New York'
+        };
+
+        const { name, age, city } = person;
+        console.log(name); // Alice
+        console.log(age);  // 30
+        console.log(city); // New York
+
+        let a = 'vijayKumar'
+        const obj  = {
+            name: 'Vijay',
+            email : 'vkc80905@gmail.com',
+            branch : 'CSE',
+            a:'This will not be a computed property',
+            [a]: 'Hello World' // Computed Property Name
+        };
+        const {name : n, email : e, branch : b} = obj;
+        // console.log(n); // Vijay
+        // console.log(e); // vkc80905gmail.com
+        // console.log(b); // CSE
+        console.log(obj);
+        
+
+
+
+        // Array destructuring
+        const numbers = [1, 2, 3, 4, 5];
+
+        const [first, second, ...rest] = numbers;
+        console.log(first);  // 1
+        console.log(second); // 2
+        console.log(rest);   // [3, 4, 5]
+    </script>
+
+    
+</body>
+</html>

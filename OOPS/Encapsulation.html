@@ -1,0 +1,32 @@
+ <!-- Encapsulation is an OOP concept where data and methods are wrapped inside a class and data access is restricted to ensure security. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encapsulation</title>
+</head>
+
+<body>
+    <script>
+        class BankAccount {
+            #balance = 0; // private data
+
+            deposit(amount) {
+                this.#balance += amount;
+            }
+
+            getBalance() {
+                return this.#balance;
+            }
+        }
+
+        const acc = new BankAccount();
+        acc.deposit(1000);
+        console.log(acc.getBalance()); // 1000
+
+    </script>
+</body>
+
+</html>

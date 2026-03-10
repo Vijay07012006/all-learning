@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech App</title>
+</head>
+
+<body>
+    <div class="container">
+        <textarea id="text" placeholder="Enter your text"></textarea>
+        <br><br>
+        <button onclick="convert()">Text to Voice</button>
+        <button onclick="convrt()">Voice to Text</button>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        function convert() {
+            let text = document.querySelector('#text').value.trim();
+
+            if (text === "") {
+                console.log('Please enter text...');
+                return;
+            }
+
+            speechSynthesis.cancel();
+
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.pitch = 1;
+            utter.volume = 1;
+            utter.rate = 1;
+
+            speechSynthesis.speak(utter);
+        }
+
+        function convrt() {
+            let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+                alert("Speech Recognition not supported");
+                return;
+            }
+
+            let rec = new SpeechRecognition();
+            rec.continuous = true;
+            rec.lang = 'en-US';
+
+            rec.onresult = function (e) {
+                let d = "";
+                for (let i = e.resultIndex; i < e.results.length; i++) {
+                    d += e.results[i][0].transcript;
+                }
+                document.getElementById('response').innerHTML = d;
+            };
+
+            rec.start();
+        }
+    </script>
+</body>
+
+</html>

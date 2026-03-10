@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            height: 400px;
+            width: 850px;
+            border: 1px solid rgb(191, 22, 22);
+            display: flex;
+            justify-content: space-between;
+            margin: 100px auto;
+        }
+
+        
+        img:hover {
+            cursor: crosshair;
+        }
+
+        .box {
+            height: 400px;
+            width: 400px;
+            /* border: 1px solid; */
+            background-position: 100px 300px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item">
+        <div style="height: 400px;width: 400px;overflow: hidden;">
+            <div id="x" style="background-color: grey; opacity: 0.2; height: 100px;width: 100px;" ></div>
+            <img src="./images/portfolio.png" id="im" alt="" height="400px" width="400px">
+        </div>
+        <div class="box">
+            <img src="" id="one" alt="" height="400px" width="400px">
+        </div>
+    </div>
+    <script>
+        let img = document.getElementById('im');
+        let one = document.getElementById('one');
+
+        img.addEventListener('mousemove', (e) => {
+            one.src = img.src;
+
+            let x = e.offsetX;
+            let y = e.offsetY;
+
+            one.style.transform = `translate(${-x+(400/2.5)}px, ${-y+(400/2.5)}px) scale(1.5)`;
+            one.style.transformOrigin='top';
+        });
+
+        img.addEventListener('mouseleave', () => {
+            one.src = '';
+            one.style.transform = 'translate(0,0) scale(1)';
+        });
+
+    </script>
+
+</body>
+
+</html>

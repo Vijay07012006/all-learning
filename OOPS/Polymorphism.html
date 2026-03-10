@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymorphism</title>
+</head>
+
+<body>
+
+    <script>
+        class Animal {
+            speak() {
+                console.log("Animal makes sound");
+            }
+        }
+
+        class Dog extends Animal {
+            speak() {
+                console.log("Dog barks");
+            }
+        }
+
+        let a = new Animal();
+        let d = new Dog();
+
+        a.speak(); // Animal makes sound
+        d.speak(); // Dog barks
+
+    </script>
+</body>
+
+</html>
