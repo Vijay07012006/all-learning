@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Run Task</button>
+    <script>
+        // btn.addEventListener('click' ,()=>{
+            
+
+        //     let a=  setInterval(()=>{
+        //         console.log("hello");
+                
+        //     },1000);
+
+        //     setTimeout(()=>{
+        //         console.log("2s baad execute ho");  
+        //         // clearInterval(a);
+        //     },10000);
+        // });
+
+        btn.onclick = () => {
+
+            let a=  setInterval(()=>{
+                console.log("hello");
+                
+            },1000);
+
+            setTimeout(()=>{
+                console.log("2s baad execute ho");  
+                // clearInterval(a);
+            },10000);
+        };
+    </script>
+</body>
+</html>

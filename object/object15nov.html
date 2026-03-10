@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const obj = {
+            name: "Alice",
+            age: 30,
+            city: "New York",
+            //  greet: function() {
+            //     console.log("Hello, my name is " + this.name);
+            // }, OR
+            greet: ()=> {
+                console.log("Hello, my name is " + this.name);
+            },
+            details:{
+                city: "Los Angeles",
+                country: "USA",
+                village:{
+                    city: "San Francisco",
+                    area: "Bay Area",
+                },
+            },
+        };
+        // console.log(obj);
+        // console.log(obj.greet());
+        // console.log(obj.details.village.city);  
+        // console.log(obj.details.village.area);
+        // console.table(obj);
+        
+        // for..of loop is not used for objects
+        // for (let key of obj) {
+        //     console.log(key + ": " + obj[key]);
+        // }
+        
+        // for..in loop for objects
+        // for (let key in obj) {       
+        //     console.log(key + ": " + obj[key]);
+        // }
+        
+
+        // const obj = {
+        //     name: "Alice",
+        //     age: 30,
+        //     city: "New York",
+        //     greet() {
+        //         console.log("Hello, my name is " + this.name);
+        //     },
+        //     details:{
+        //         city: "Los Angeles",
+        //         country: "USA",
+        //         village:{
+        //             city: "San Francisco",
+        //             area: "Bay Area",
+        //         },
+        //     },
+        // };
+        // obj.name = "Bob"; // Modifying property value
+        // obj.country = "Canada"; // Adding new property
+        // delete obj.age; // Deleting property
+        // console.log(obj);  // Displaying the modified object
+        // console.log(obj.greet());  // Calling the greet method
+        // console.log(obj.details.village.city);  // Accessing nested property
+        // console.log(obj.details.village.area); // Accessing nested property
+        // console.table(obj); // Displaying the object in table format
+
+        
+        // const o={
+        //     ["full name"]: "John Doe", // Property with space in the name
+        //     age: 28,
+        // }
+        // console.log(o);
+        
+        //[object Object] ==>  [object(datatype)   Object(constructor)]
+
+        // prototype -> object from which other objects inherit properties and methods
+
+        // // rest operator(...)-> collects multiple elements and condenses them into a single element (array or object)
+
+        // const obj = {
+        //     name: "Alice",
+        //     age: 30,
+        //     city: "New York",
+        // };
+        // let c ={ ...obj }; // copying object obj to b
+        // console.log(c);
+        // console.table(c);
+
+        // // spread operator(...)-> takes an array or object and spreads its elements into individual elements
+
+        // // assign method-> used to copy the values of all enumerable own properties from one or more source objects to a target object. It returns the target object.
+        
+        const target = { a: 1, b: 2 };
+        const source = { b: 4, c: 5 };
+        const returnedTarget = Object.assign(target, source);
+        console.log(target); // { a: 1, b: 4, c: 5 }
+        console.log(returnedTarget); // { a: 1, b    : 4, c: 5 } 
+
+        const a = {
+            name : "Alice",
+            age  : 25,
+            branch : "CSE",
+        };
+        let b = Object.assign({}, a); // copying object a to b
+        console.log(b);
+        console.table(b);
+
+        let c = Object.entries(a); // converting object a to array of key-value pairs
+        console.log(c); 
+        console.table(c);
+
+        let d = Object.keys(a); // getting keys of object a
+        console.log(d);
+        console.table(d);
+
+        let e = Object.values(a); // getting values of object a
+        console.log(e);
+        console.table(e);
+
+        let f = Object.hasOwn(a, "name"); // checking if object a has property "name"
+        console.log(f); // true
+
+        let g = Object.create(a); // creating a new object g with prototype a
+        console.log(g);
+
+        let h = Object.freeze(a); // freezing object a
+        a.age = 30; // this will not work as object a is frozen
+        console.log(a);
+
+        let i = Object.seal(a); // sealing object a
+        delete a.branch; // this will not work as object a is sealed
+        console.log(a);
+
+        let j = Object.isFrozen(a); // checking if object a is frozen
+        console.log(j); // true
+
+        
+        
+
+    </script>
+</body>
+</html>

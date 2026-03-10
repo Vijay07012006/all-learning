@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Validation</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter name"  id="name">
+    <span id="nmer"></span>
+    <br>
+    <!-- <input type="number" placeholder="Enter age" id="age">
+    <br>
+    <input type="password" placeholder="Enter password" id="password">
+    <br>
+    <input type="email" placeholder="Enter address" id="address">
+    <br> -->
+    <input type="number" placeholder="Enter phone number" id="phone">
+    <span id="noer"></span>
+
+    <br>
+    <button onclick="validate()">Submit</button>
+
+    <script>
+        function validate(){
+            let name = document.getElementById("name").value;
+            // let age = document.getElementById("age").value;
+            // let password = document.getElementById("password").value;
+            // let address = document.getElementById("address").value;
+            let phone = document.getElementById("phone").value;
+
+            if(name.length >=3 && name.length <=30){
+                // alert("Name length is valid.");
+            }
+            else{
+                alert("Name length must be between 3 and 30 characters.");
+                document.getElementById("nmer").innerHTML="Invalid name length";
+                document.getElementById("nmer").style.color="red";
+                document.getElementById("name").style.border="2px solid red";
+            }
+
+            // if(age < 18 || age > 100){
+            //     alert("Age must be between 18 and 100.");
+
+            //     document.getElementById("noer").innerHTML="Invalid number length";
+            //     document.getElementById("noer").style.color="red";
+            //     document.getElementById("number").style.border="2px solid red";
+                
+            // }
+            // else{
+            //     alert("Age is valid.");
+            // }
+
+            // if(password.length < 6){
+            //     alert("Password must be at least 6 characters long.");
+            //     return false;
+            // }
+
+            // if(address.length < 10){
+            //     alert("Address must be at least 10 characters long.");
+            //     return false;
+            // }
+
+            if(phone.length != 10){
+                alert("Phone number must be exactly 10 digits long.");
+                document.getElementById("noer").innerHTML="Invalid number length";
+                document.getElementById("noer").style.color="red";
+                document.getElementById("phone").style.border="2px solid red";
+            }
+            else{
+                // alert("Phone number length is valid.");
+            }
+
+            // alert("All validations passed!");
+            // return true;
+        }
+    </script>
+</body>
+</html>

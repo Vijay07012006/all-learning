@@ -1,0 +1,9 @@
+.bg-white {
+            color: black;
+            background-color: #fff;
+        }
+
+        .bg-dark {
+            color: white;
+            background-color: black;
+        }

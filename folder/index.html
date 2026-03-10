@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // // // // // // // // alert("hekdjfkhfldjfk");
+// // // // // // // // let a=10;
+// // // // // // // // let a = "10";
+// // // // // // // // let a = true;
+// // // // // // // // let a = null;
+// // // // // // // // let a = undefined;
+// // // // // // // // let a = Symbol("hello");
+// // // // // // // // let a = BigInt(12345678901234567890);
+// // // // // // // // let a = {name: "John", age: 30};
+// // // // // // // // let a = [1, 2, 3, 4, 5];
+// // // // // // // // let a = function() { return "Hello"; };
+// // // // // // // // let a = () => "Hello";
+// // // // // // // // let a = new Date();
+// // // // // // // // let a = /ab+c/;
+// // // // // // // // let a = NaN;
+// // // // // // // // let a="10"+19;  // String Concatenation
+// // // // // // // // let a = Infinity;
+// // // // // // // // let a = -Infinity;
+// // // // // // // // let a = 42n;
+// // // // // // // // let a = new Map();
+// // // // // // // // let a = new Set();
+// // // // // // // // let a = new WeakMap();
+// // // // // // // // let a = new WeakSet();
+// // // // // // // // let a = Promise.resolve("Hello");
+// // // // // // // // let a = 10n;
+// // // // // // // // let a = Symbol.iterator;
+// // // // // // // // let a = typeof 123;
+// // // // // // // // let a = typeof "Hello";
+// // // // // // // // let a = typeof true;
+// // // // // // // // let a = typeof undefined;
+// // // // // // // // let a = typeof null;
+// // // // // // // // let a = typeof {name: "John"};   
+// // // // // // // // let a = typeof [1, 2, 3];
+// // // // // // // // let a = typeof function() {};
+// // // // // // // // let a = typeof (() => {});
+// // // // // // // // let a = typeof NaN;
+// // // // // // // // let a = typeof BigInt(1234567890);
+// // // // // // // // let a = typeof Symbol("hello");
+// // // // // // // // let a = typeof new Date();
+// // // // // // // // let a = typeof /ab+c/;
+// // // // // // // // let a = typeof Promise.resolve("Hello");
+// // // // // // // // let a = typeof 42n;
+// // // // // // // // let a = typeof Symbol.iterator;
+// // // // // // // // let a = typeof new Map();    
+// // // // // // // // let a = typeof new Set();
+// // // // // // // // let a = typeof new WeakMap();
+// // // // // // // // let a = typeof new WeakSet();
+// // // // // // // // let a = typeof BigInt(12345678901234567890);
+// // // // // // // let a = typeof NaN;
+// let a = typeof Infinity;
+// let a = typeof -Infinity;
+// let a = typeof 10n;
+// console.log(a);
+// console.log(typeof a);
+
+// // // // // // // // let a = 10;
+// // // // // // // // let b= 14;
+// // // // // // // // let c=13;
+// // // // // // // // let d;
+// // // // // // // // d = (a>b && a>c)? 'a is greatest':( (b>c)? 'b is greatest': 'c is greatest');
+// // // // // // // // console.log(d);
+
+// // // // // // // // let a1 = 5;
+// // // // // // // // let b1 = 10;
+// // // // // // // // let c1=15;
+// // // // // // // // let d1=12;
+// // // // // // // // let e1;
+// // // // // // // // el = (a1 > b1 && a1 > c1 && a1 > d1) ? "a1 is greatest" :((b1> c1 && b1 > d1) ? "b1 is greatest" : ((c1 > d1) ? "c1 is greatest" : "d1 is greatest"));
+// // // // // // // // console.log(el);
+
+// // // // // // // let a = parseFloat(window.prompt("Enter first number: "));
+// // // // // // // let b = parseFloat(window.prompt("Enter second number: "));
+// // // // // // // let operation = window.prompt("Enter operation (+, -, *, /): ");
+// // // // // // // let result;
+
+// // // // // // // if (operation === "+") {
+// // // // // // //     result = a + b;
+// // // // // // // } else if (operation === "-") {
+// // // // // // //     result = a - b;
+// // // // // // // } else if (operation === "*") {
+// // // // // // //     result = a * b;
+// // // // // // // } else if (operation === "/") {
+// // // // // // //     result = a / b;
+// // // // // // // } else {
+// // // // // // //     result = "Invalid operation";
+// // // // // // // }
+
+// // // // // // // console.log("Result: " + result); 
+
+// // // // // // //08-11-2025
+
+// // // // // // let a = 10;
+// // // // // // if(a>20){
+// // // // // //     console.log("a is greater than 20");
+// // // // // // }
+// // // // // // else{
+// // // // // //     console.log("a is less than 20");
+// // // // // // }
+
+// // // // // //WAP to check a number is divisible by 5 and 3 or not
+// // // // // let num = parseInt(window.prompt("Enter a number: "));
+// // // // // if(num % 3 == 0 &&  num % 5 ==0){
+// // // // //     console.log(num + " is divisible by both 3 and 5");
+// // // // // }
+// // // // // else{
+// // // // //     console.log(num + " is not divisible by both 3 and 5");
+// // // // // }
+
+// // // // let a = parseFloat(window.prompt("Enter a number: "));
+// // // // if(a<20){
+// // // //     console.log("a is small");
+// // // // }
+// // // // else if(a<50){
+// // // //     console.log("a is small");
+// // // // }
+// // // // else if(a<100){
+// // // //     console.log("a is small");
+// // // // }
+// // // // else if(a==100){
+// // // //     console.log("a is equal to 100");
+// // // // }
+// // // // else{
+// // // //     console.log("a is large");
+// // // // }
+
+// // // let score = parseFloat(window.prompt("Enter your score: "));
+// // // if(score<50){
+// // //     console.log("No half centuary");
+// // // }
+// // // else if(score>=50 && score<100){
+// // //     console.log("Half centuary");
+// // // }
+// // // else if(score==100){
+// // //     console.log("Perfect Centuary");
+// // // }
+// // // else if(score>100 && score<150)
+// // // {
+// // //     console.log("above Centuary and less than 150");
+// // // }
+// // // else if(score>150 && score<200){
+// // //     console.log("above 150 and less than 200");
+// // // }
+// // // else if(score==200){
+// // //     console.log("double centuary");
+// // // }
+// // // else if(score>200 && score<250){   
+// // //     console.log("above 200 and less than 250");
+// // // }
+// // // else if(score==300){
+// // //     console.log("triple centuary");
+// // // }
+// // // else{
+// // //     console.log("GOAT Player");
+    
+// // // }
+
+
+// // let user = window.prompt("Enter user type(admin , student , chairmen) : ");
+// // let pass = window.prompt("Enter your password: ");
+// // if(user === 'student'){
+// //     if(pass === 'student123'){
+// //         console.log("Welcome Student");
+// //     }
+// //     else{
+// //         console.log("Invalid password for student");
+// //     }
+// // }
+// // else if(user === 'admin'){
+// //     if(pass === 'admin123'){
+// //         console.log("Welcome Admin");
+// //     }
+// //     else{
+// //         console.log("Invalid password for admin");
+// //     }
+// // }
+// // else if(user === 'chairmen'){
+// //     if(pass === 'chairmen123'){
+// //         console.log("Welcome Chairmen");
+// //     }
+// //     else{
+// //         console.log("Invalid password for chairmen");
+// //     }
+// // }
+// // else{
+// //     console.log("Invalid user type");
+// // }
+
+// let a = 30;
+// switch(a){
+//     case 10:
+//         console.log("a is 10");
+//         break;
+//     case 20:
+//         console.log("a is 20");
+//         break;
+//     case 30:
+//         console.log("a is 30");
+//         break;
+//     default:
+//         console.log("a is not 10, 20 or 30");
+//         break
+// }   
+        // Truthy and Falsy Values
+
+// Falsy values: false, 0, -0, 0n, "", null, undefined, NaN
+// Truthy values: All values that are not falsy
+
+// Example of falsy value
+// let a = 0;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// if(!a){
+//     console.log("Value is false");
+// }
+// else{
+//     console.log("Value is true");
+// }
+
+// let a = "Vijay";
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = "";
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = null;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = undefined;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }            
+// let a = NaN;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = 42n;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = -0;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = "  ";
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = [];
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = {};
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = function(){};
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = Symbol("hello");
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+// let a = BigInt(0);
+// // let a = BigInt(-0);
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }   
+
+// let a = 123;
+// if(a){
+//     console.log("Value is true");
+// }
+// else{
+//     console.log("Value is false");
+// }
+
+    //truthy and false using switch case
+let values = [0, 1, "", "hello", null, [], {}, NaN, undefined];
+
+for (let v of values) {
+  switch (!!v) {
+    case true:
+      console.log(v, "=> Truthy");
+      break;
+    case false:
+      console.log(v, "=> Falsy");
+      break;
+  }
+}
+
+
+    </script>
+</body>
+</html>

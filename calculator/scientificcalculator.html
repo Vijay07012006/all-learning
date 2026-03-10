@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scientific Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background: white;
+      border-radius: 30px;
+      width: 420px;
+      padding: 20px;
+    }
+
+    .display {
+      width: 100%;
+      height: 80px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      font-size: 28px;
+      text-align: right;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: none;
+      outline: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      justify-items: center;
+    }
+
+    button {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      font-size: 18px;
+      border: none;
+      background-color: #eee;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button.operator {
+      background-color: #d5cfcf;
+    }
+
+    button.equal {
+      background-color: orangered;
+      color: white;
+      font-size: 24px;
+    }
+
+    button.equal:hover {
+      background-color: darkred;
+    }
+
+    .red {
+      color: red;
+    }
+
+    button:hover {
+      background-color: #ccc;
+    }
+
+    @media (max-width: 460px) {
+      .calculator {
+        transform: scale(0.9);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" id="display" class="display" readonly />
+
+    <div class="buttons">
+      <button onclick="append('sin(')">sin</button>
+      <button onclick="append('cos(')">cos</button>
+      <button onclick="append('tan(')">tan</button>
+      <button class="red" onclick="append('rad')">rad</button>
+      <button onclick="append('deg')">deg</button>
+
+      <button onclick="append('log(')">log</button>
+      <button onclick="append('ln(')">ln</button>
+      <button onclick="append('(')">(</button>
+      <button onclick="append(')')">)</button>
+      <button onclick="append('inv(')">inv</button>
+
+      <button onclick="append('!')">!</button>
+      <button class="operator" onclick="clearDisplay()">AC</button>
+      <button class="operator" onclick="append('%')">%</button>
+      <button class="operator" onclick="backspace()">⌫</button>
+      <button class="operator" onclick="append('/')">÷</button>
+
+      <button onclick="append('^')">^</button>
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button class="operator" onclick="append('*')">*</button>
+
+      <button onclick="append('√(')">√</button>
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button class="operator" onclick="append('-')">-</button>
+
+      <button onclick="append('π')">π</button>
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button class="operator" onclick="append('+')">+</button>
+
+      <button onclick="append('e')">e</button>
+      <button onclick="append('00')">00</button>
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function append(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function backspace() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+      try {
+        let expr = display.value
+          .replace(/π/g, "Math.PI")
+          .replace(/e/g, "Math.E")
+          .replace(/sin\(/g, "Math.sin(")
+          .replace(/cos\(/g, "Math.cos(")
+          .replace(/tan\(/g, "Math.tan(")
+          .replace(/log\(/g, "Math.log10(")
+          .replace(/ln\(/g, "Math.log(")
+          .replace(/√\(/g, "Math.sqrt(")
+          .replace(/\^/g, "**");
+
+        display.value = eval(expr);
+      } catch {
+        display.value = "Error";
+      }
+    }
+  </script>
+
+</body>
+</html>

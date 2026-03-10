@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- <button id="btn">Click here !</button> -->
+
+    <!-- <button onclick="fun()">Click here !</button> -->
+     <!-- <button onkeypress="fun()">Click here !</button> -->
+     <!-- <button onkeyup="fun()">Click here !</button> -->
+     <!-- <button onkeydown="fun()">Click here !</button>
+     <button onblur="fun()">Click here !</button>
+     -->
+      <!-- <button onmouseover="fun()">Click here !</button> -->
+      <!-- <button onmouseout="fun()">Click here !</button> -->
+
+
+      <h1>Awesome Shirts</h1>
+      <strike>999 Rs</strike>
+      <span id="op">400</span>
+      <span>Rs</span>
+      Quantity:
+      <select onchange="fun()" id="Qty">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+     <script>
+        // function fun(){
+        //     alert("Button clicked!");
+    //     // } 
+    // <!--document.getElementById("btn").addEventListener("click",fun); -->
+
+    let op =parseInt( document.getElementById("op").innerText);
+    function fun(){
+        let qty = parseInt(document.getElementById("Qty").value);
+        // console.log(qty);
+        let total = op * qty;
+        // console.log(total);
+        document.getElementById("op").innerText=total;
+    }
+    // let qty = document.getElementById("Qty");
+    </script>
+</body>
+</html>

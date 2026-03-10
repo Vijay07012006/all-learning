@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatorbest</title>
+    <style>
+        #container {
+            height: 500px;
+            width: 450px;
+            border: 3px solid black;
+            border-radius: 20px;
+            /* box-shadow: inset 0 0 30px rgba(155, 5, 5, 1); */
+            box-shadow: 0px 0px 30px rgba(18, 71, 186, 1);
+            background: conic-gradient(red, black, blue, black, rgb(218, 89, 89));
+            font-family: cursive;
+            /* background-color: black; */
+        }
+
+        #h1 {
+            color: white;
+            box-shadow: 0 0 10px;
+        }
+
+        #n1 {
+            height: 50px;
+            width: 200px;
+
+        }
+
+        #n2 {
+            height: 50px;
+            width: 200px;
+        }
+
+        #n3 {
+            height: 100px;
+            width: 400px;
+            text-align: left;
+            font-size: 20px;
+            /* margin: 20px 0px 20px 20px; */
+            border-radius: 10px;
+            padding-left: 30px;
+            margin-top: 20px;
+            color: rgb(174, 46, 8);
+            margin-bottom: 20px;
+            transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        #n3:hover {
+            transition-delay: 0s, 0.5s;
+            color: #fff;
+            box-shadow:
+                0 0 10px rgb(180, 29, 21),
+                0 0 20px rgb(227, 103, 8),
+                0 0 40px rgb(197, 43, 12),
+                0 0 80px rgb(255, 19, 19),
+                0 0 160px rgb(234, 243, 244);
+        }
+
+
+        #btn {
+            background-color: black;
+            position: relative;
+            display: inline-block;
+            font-size: 1.5rem;
+            letter-spacing: .1rem;
+            color: #0ef;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 2px solid #0ef;
+            padding: 10px 30px;
+            z-index: 1;
+            overflow: hidden;
+            transition: color 1s, box-shadow 1s;
+            margin-top: 10px;
+
+        }
+
+        #btn:hover {
+            /* background-color: rgb(141, 5, 5);
+            color: black;
+            /* box-shadow: 0px 0px 30px rgb(175, 40, 6); */
+            /* transform: skew(10deg);
+            /* transition: red 0.5s, ; */
+            transition-delay: 0s, 0.5s;
+            color: #fff;
+            box-shadow:
+                0 0 10px #0ef,
+                0 0 20px #0ef,
+                0 0 40px #0ef,
+                0 0 80px #0ef,
+                0 0 160px #0ef;
+        }
+
+        /* #btn:active {
+            background-color: rgb(18, 71, 186);
+            color: white;
+            box-shadow: inset 0px 0px 10px rgb(128, 165, 112);
+        }
+
+        #btn:focus {
+            outline: none;
+            box-shadow: 0px 0px 10px rgb(40, 161, 7);
+        } */
+        #btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 0%;
+            height: 100%;
+            background: #0ef;
+            z-index: -1;
+            transform: skewX(35deg);
+            transition: transform 1s;
+        }
+
+        #btn:hover::before {
+            width: 200%;
+            left: 50%;
+            transition-delay: 0s;
+            transform: skewX(0deg);
+        }
+    </style>
+    <script>
+
+        function Result() {
+            let n1 = document.getElementById("n1").value;
+            // alert("hello")
+            let n2 = document.getElementById("n2").value;
+            // alert("hi")
+            // let a = parseFloat(n1) + parseFloat(n2);
+            document.getElementById("n3").value = "Result:"
+
+
+        }
+        function sum() {
+            //alert("sum")
+            let n1 = document.getElementById("n1").value;
+            //alert(n1)
+            let n2 = document.getElementById("n2").value;
+            //alert(n2)
+            let b = parseFloat(n1) + parseFloat(n2);
+            document.getElementById("n3").value = "Result:" + b
+            document.getElementById("n3").style.color = "red";
+            document.getElementById("n3").style.fontSize = "30px";
+            document.getElementById("n3").style.backgroundColor = "white";
+            document.getElementById("n3").style.border = "5px solid black";
+            document.getElementById("n3").style.borderRadius = "10px";
+            document.getElementById("n3").style.textAlign = "center";
+            document.getElementById("n3").style.marginTop = "20px";
+            document.getElementById("n3").style.paddingLeft = "30px";
+            document.getElementById("n3").style.transition = "all 0.7s ease-in-out";
+            document.getElementById("n3").style.boxShadow = "0px 0px 10px rgb(128, 165, 112)";
+            document.getElementById("n3").style.fontWeight = "bold";
+            document.getElementById("n3").style.textTransform = "uppercase";
+            document.getElementById("n3").style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.5)";
+        }
+        function sub() {
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+            let c = parseFloat(n1) - parseFloat(n2);
+            document.getElementById("n3").value = "Result:" + c
+            document.getElementById("n3").style.color = "red";
+            document.getElementById("n3").style.fontSize = "30px";
+            document.getElementById("n3").style.backgroundColor = "white";
+            document.getElementById("n3").style.border = "5px solid black";
+            document.getElementById("n3").style.borderRadius = "10px";
+            document.getElementById("n3").style.textAlign = "center";
+            document.getElementById("n3").style.marginTop = "20px";
+            document.getElementById("n3").style.paddingLeft = "30px";
+            document.getElementById("n3").style.transition = "all 0.7s ease-in-out";
+            document.getElementById("n3").style.boxShadow = "0px 0px 10px rgb(128, 165, 112)";
+            document.getElementById("n3").style.fontWeight = "bold";
+            document.getElementById("n3").style.textTransform = "uppercase";
+            document.getElementById("n3").style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.5)";
+        }
+        function div() {
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+            let d = parseFloat(n1) / parseFloat(n2);
+            document.getElementById("n3").value = "Result:" + d
+            document.getElementById("n3").style.color = "red";
+            document.getElementById("n3").style.fontSize = "30px";
+            document.getElementById("n3").style.backgroundColor = "white";
+            document.getElementById("n3").style.border = "5px solid black";
+            document.getElementById("n3").style.borderRadius = "10px";
+            document.getElementById("n3").style.textAlign = "center";
+            document.getElementById("n3").style.marginTop = "20px";
+            document.getElementById("n3").style.paddingLeft = "30px";
+            document.getElementById("n3").style.transition = "all 0.7s ease-in-out";
+            document.getElementById("n3").style.boxShadow = "0px 0px 10px rgb(128, 165, 112)";
+            document.getElementById("n3").style.fontWeight = "bold";
+            document.getElementById("n3").style.textTransform = "uppercase";
+            document.getElementById("n3").style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.5)";
+        }
+        function mod() {
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+            let e = parseFloat(n1) % parseFloat(n2);
+            document.getElementById("n3").value = "Result:" + e
+            document.getElementById("n3").style.color = "red";
+            document.getElementById("n3").style.fontSize = "30px";
+            document.getElementById("n3").style.backgroundColor = "white";
+            document.getElementById("n3").style.border = "5px solid black";
+            document.getElementById("n3").style.borderRadius = "10px";
+            document.getElementById("n3").style.textAlign = "center";
+            document.getElementById("n3").style.marginTop = "20px";
+            document.getElementById("n3").style.paddingLeft = "30px";
+            document.getElementById("n3").style.transition = "all 0.7s ease-in-out";
+            document.getElementById("n3").style.boxShadow = "0px 0px 10px rgb(128, 165, 112)";
+            document.getElementById("n3").style.fontWeight = "bold";
+            document.getElementById("n3").style.textTransform = "uppercase";
+            document.getElementById("n3").style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.5)";
+        }
+        function mult() {
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+            let f = parseFloat(n1) * parseFloat(n2);
+            document.getElementById("n3").value = "Result:" + f
+            document.getElementById("n3").style.color = "red";
+            document.getElementById("n3").style.fontSize = "30px";
+            document.getElementById("n3").style.backgroundColor = "white";
+            document.getElementById("n3").style.border = "5px solid black";
+            document.getElementById("n3").style.borderRadius = "10px";
+            document.getElementById("n3").style.textAlign = "center";
+            document.getElementById("n3").style.marginTop = "20px";
+            document.getElementById("n3").style.paddingLeft = "30px";
+            document.getElementById("n3").style.transition = "all 0.7s ease-in-out";
+            document.getElementById("n3").style.boxShadow = "0px 0px 10px rgb(128, 165, 112)";
+            document.getElementById("n3").style.fontWeight = "bold";
+            document.getElementById("n3").style.textTransform = "upper case";
+            document.getElementById("n3").style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.5)";
+        }
+
+    </script>
+</head>
+
+<body>
+    <center>
+        <div id="container">
+            <h1 id="h1" align="center">calculator</h1>
+            <input type="number" id="n1">
+            <input type="number" id="n2">
+            <br>
+            <input type="text" value="Result..." id="n3" onclick="Result()" readonly>
+            <br>
+            <input type="button" value="Add" id="btn" onclick="sum()">
+            <input type="button" value="sub" id="btn" onclick="sub()">
+            <input type="button" value="div" id="btn" onclick="div()">
+            <input type="button" value="mod" id="btn" onclick="mod()">
+            <input type="button" value="mult" id="btn" onclick="mult()">
+
+
+
+        </div>
+    </center>
+</body>
+
+</html>

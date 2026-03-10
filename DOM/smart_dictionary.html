@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="hi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Dictionary — Advanced</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg1: #071126;
+      --card: rgba(255, 255, 255, 0.03);
+      --accent1: #06b6d4;
+      --accent2: #7c3aed;
+      --muted: #9fb0c6;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--bg1), #041025);
+      color: #eaf4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 920px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      padding: 18px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .searchWrap {
+      position: relative;
+      flex: 1;
+    }
+
+    .searchInput {
+      width: 100%;
+      height: 48px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
+      color: inherit;
+      outline: none;
+      font-size: 16px;
+      transition: box-shadow .12s ease;
+    }
+
+    .searchInput:focus {
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12);
+    }
+
+    .suggestions {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 56px;
+      background: rgba(2, 6, 23, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      max-height: 220px;
+      overflow: auto;
+      padding: 6px;
+      z-index: 30;
+    }
+
+    .sitem {
+      padding: 8px 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      color: #dcefff;
+    }
+
+    .sitem:hover {
+      background: rgba(255, 255, 255, 0.02);
+      transform: translateX(6px);
+      transition: transform .12s ease;
+    }
+
+    .btn {
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 0;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* result */
+    #resultArea {
+      margin-top: 18px;
+      min-height: 140px;
+    }
+
+    .result {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .left {
+      min-width: 120px;
+    }
+
+    .word {
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .phonetic {
+      font-size: 14px;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    .play {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .fav {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .meanings {
+      flex: 1;
+    }
+
+    .meaning-card {
+      background: rgba(255, 255, 255, 0.01);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .pos {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(124, 58, 237, 0.08);
+      color: #e9ddff;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .definition {
+      font-size: 16px;
+      margin: 6px 0;
+    }
+
+    .example {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .syns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px
+    }
+
+    .syn {
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 6px 8px;
+      border-radius: 8px
+    }
+
+    /* history & favs */
+    .panel {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pbtn {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer
+    }
+
+    /* animations */
+    .fade-in {
+      animation: fadeIn .18s ease both
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.06);
+      border-top-color: var(--accent2);
+      animation: spin .9s linear infinite
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .error {
+      color: var(--danger);
+      margin-top: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <header>
+        <div class="logo">Dic</div>
+        <div>
+          <h1 id="title">Smart Dictionary — Advanced</h1>
+          <p class="lead">Autocomplete, offline cache (PWA), history, export/import, highlight & more.</p>
+        </div>
+      </header>
+
+      <div class="controls">
+        <div class="searchWrap" role="search">
+          <input id="searchInput" class="searchInput" placeholder="Type a word (autocomplete)... (press Enter)"
+            aria-label="Search word" autocomplete="off" />
+          <div id="suggestBox" class="suggestions" style="display:none" role="listbox" aria-label="Suggestions"></div>
+        </div>
+
+        <div class="meta">
+          <button id="searchBtn" class="btn" title="Search">Search</button>
+          <div id="status" class="chip">Ready</div>
+        </div>
+      </div>
+
+      <div id="resultArea"></div>
+
+      <div class="panel">
+        <div>Recent:</div>
+        <div id="history" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+
+        <div style="margin-left:auto; display:flex; gap:8px;">
+          <button id="viewFavs" class="pbtn">View Favorites</button>
+          <button id="exportBtn" class="pbtn">Export JSON</button>
+          <label class="pbtn" style="cursor:pointer">
+            Import JSON
+            <input id="importFile" type="file" accept="application/json" style="display:none" />
+          </label>
+        </div>
+      </div>
+
+      <div id="error" class="error" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    /* -----------------------------
+       Config & small local word list
+       (For production you can use a bigger JSON dictionary or remote API)
+       ----------------------------- */
+    const API_BASE = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+    const STORAGE_HISTORY = 'dic_history_v2';
+    const STORAGE_FAVS = 'dic_favs_v2';
+    const REQUESTS_PER_SECOND = 3; // rate limit
+
+    // mini word list for autocomplete (you can replace with a larger words.json file)
+    const wordList = [
+      "apple", "application", "apply", "appoint", "approval", "banana", "band", "bandwidth", "binary", "bind",
+      "dictionary", "dictate", "diction", "divide", "domain", "docker", "deploy", "development", "device",
+      "example", "examine", "excel", "excite", "function", "fetch", "feature", "frontend", "framework", "firebase",
+      "server", "service", "search", "syntax", "system", "sync", "symbol", "synchronize", "sentence"
+    ];
+
+    /* -----------------------------
+       Simple request queue + rate limit
+       ----------------------------- */
+    class RequestQueue {
+      constructor(ratePerSec = 3) {
+        this.queue = [];
+        this.interval = 1000 / ratePerSec;
+        this.running = false;
+      }
+      push(task) {
+        return new Promise((resolve, reject) => {
+          this.queue.push({ task, resolve, reject });
+          if (!this.running) this.run();
+        });
+      }
+      async run() {
+        this.running = true;
+        while (this.queue.length) {
+          const item = this.queue.shift();
+          try {
+            const res = await item.task();
+            item.resolve(res);
+          } catch (err) {
+            item.reject(err);
+          }
+          await new Promise(r => setTimeout(r, this.interval));
+        }
+        this.running = false;
+      }
+    }
+    const rq = new RequestQueue(REQUESTS_PER_SECOND);
+
+    /* -----------------------------
+       DOM refs
+       ----------------------------- */
+    const $ = id => document.getElementById(id);
+    const input = $('searchInput');
+    const suggestions = $('suggestBox');
+    const searchBtn = $('searchBtn');
+    const resultArea = $('resultArea');
+    const status = $('status');
+    const historyWrap = $('history');
+    const errorEl = $('error');
+    const viewFavs = $('viewFavs');
+    const exportBtn = $('exportBtn');
+    const importFile = $('importFile');
+
+    /* -----------------------------
+       Helpers: localStorage history & favs
+       ----------------------------- */
+    function getHistory() { return JSON.parse(localStorage.getItem(STORAGE_HISTORY) || '[]'); }
+    function pushHistory(word) {
+      let arr = getHistory();
+      arr = arr.filter(w => w.toLowerCase() !== word.toLowerCase());
+      arr.unshift(word);
+      if (arr.length > 12) arr = arr.slice(0, 12);
+      localStorage.setItem(STORAGE_HISTORY, JSON.stringify(arr));
+      renderHistory();
+    }
+    function renderHistory() {
+      historyWrap.innerHTML = '';
+      const arr = getHistory();
+      arr.forEach(w => {
+        const b = document.createElement('button');
+        b.textContent = w; b.className = 'pbtn';
+        b.onclick = () => performSearch(w);
+        historyWrap.appendChild(b);
+      });
+    }
+    function getFavs() { return JSON.parse(localStorage.getItem(STORAGE_FAVS) || '{}'); }
+    function toggleFav(word, data) {
+      const favs = getFavs();
+      if (favs[word]) delete favs[word];
+      else favs[word] = data;
+      localStorage.setItem(STORAGE_FAVS, JSON.stringify(favs));
+    }
+    function renderFavsModal() {
+      const favs = getFavs();
+      const list = Object.keys(favs);
+      if (!list.length) { alert('No favorites yet'); return; }
+      const html = list.map(k => `• ${k}`).join('\\n');
+      alert('Favorites:\\n' + html + '\\n\nYou can export them using Export JSON.');
+    }
+
+    /* -----------------------------
+       Autocomplete (simple fuzzy)
+       ----------------------------- */
+    function showSuggestions(q) {
+      if (!q) { suggestions.style.display = 'none'; return; }
+      const uq = q.toLowerCase();
+      const matches = wordList.filter(w => w.startsWith(uq) || w.includes(uq)).slice(0, 12);
+      suggestions.innerHTML = '';
+      if (!matches.length) { suggestions.style.display = 'none'; return; }
+      matches.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'sitem';
+        // highlight matched part (simple)
+        const idx = m.toLowerCase().indexOf(uq);
+        if (idx >= 0) {
+          div.innerHTML = m.slice(0, idx) + '<strong>' + m.slice(idx, idx + uq.length) + '</strong>' + m.slice(idx + uq.length);
+        } else div.textContent = m;
+        div.onclick = () => { input.value = m; suggestions.style.display = 'none'; performSearch(m); };
+        suggestions.appendChild(div);
+      });
+      suggestions.style.display = 'block';
+    }
+
+    /* -----------------------------
+       Core: fetch word (via queued requests)
+       ----------------------------- */
+    async function fetchWord(word) {
+      if (!word) throw new Error('Empty');
+      const task = () => fetch(API_BASE + encodeURIComponent(word)).then(async res => {
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({ message: 'Not found' }));
+          const e = new Error(err.message || 'Error');
+          e.status = res.status; throw e;
+        }
+        const data = await res.json();
+        return data;
+      });
+      return rq.push(task);
+    }
+
+    /* -----------------------------
+       Highlight function: wrap occurrences of word inside example sentences
+       ----------------------------- */
+    function highlightWordInText(text, word) {
+      if (!text || !word) return text;
+      try {
+        const re = new RegExp('(' + word.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + ')', 'ig');
+        return text.replace(re, '<mark style="background:linear-gradient(90deg, rgba(124,58,237,0.18), rgba(6,182,212,0.12)); padding:0 3px; border-radius:4px;">$1</mark>');
+      } catch (e) {
+        return text;
+      }
+    }
+
+    /* -----------------------------
+       Render result (meanings, examples, synonyms, antonyms, origin)
+       ----------------------------- */
+    function renderResult(data, searchedWord) {
+      resultArea.innerHTML = '';
+      if (!data || !data.length) { resultArea.innerHTML = '<div class="error">No data</div>'; return; }
+      const entry = data[0];
+      const word = entry.word;
+      const phon = (entry.phonetics || []).find(p => p.text)?.text || (entry.phonetic || '') || '';
+      const audio = (entry.phonetics || []).find(p => p.audio)?.audio || '';
+
+      const outer = document.createElement('div'); outer.className = 'result fade-in';
+
+      const left = document.createElement('div'); left.className = 'left';
+      const wdiv = document.createElement('div'); wdiv.className = 'word';
+      const wordSpan = document.createElement('span'); wordSpan.textContent = word;
+      wdiv.appendChild(wordSpan);
+      if (phon) { const p = document.createElement('span'); p.className = 'phonetic'; p.textContent = phon; wdiv.appendChild(p); }
+      left.appendChild(wdiv);
+
+      // play audio
+      const play = document.createElement('button'); play.className = 'play'; play.title = 'Play';
+      play.textContent = '🔊'; play.style.marginTop = '6px';
+      play.onclick = () => { if (audio) new Audio(audio).play().catch(() => { }); };
+      left.appendChild(play);
+
+      // favorite button
+      const fav = document.createElement('button'); fav.className = 'fav'; fav.textContent = '☆'; fav.title = 'Favorite';
+      fav.onclick = () => { toggleFav(word, entry); alert((getFavs()[word]) ? 'Removed from favorites' : 'Added to favorites'); };
+      left.appendChild(fav);
+
+      // meanings column
+      const meanings = document.createElement('div'); meanings.className = 'meanings';
+      if (entry.origin) {
+        const origin = document.createElement('div'); origin.className = 'meaning-card';
+        origin.innerHTML = `<div style="color:var(--muted); font-size:13px; margin-bottom:6px">Origin</div><div style="font-size:14px">${entry.origin}</div>`;
+        meanings.appendChild(origin);
+      }
+
+      (entry.meanings || []).forEach(m => {
+        const card = document.createElement('div'); card.className = 'meaning-card';
+        const pos = document.createElement('div'); pos.className = 'pos'; pos.textContent = m.partOfSpeech || '—'; card.appendChild(pos);
+
+        (m.definitions || []).forEach((d, i) => {
+          const def = document.createElement('div'); def.className = 'definition';
+          def.textContent = `${i + 1}. ${d.definition || ''}`; card.appendChild(def);
+          if (d.example) {
+            const ex = document.createElement('div'); ex.className = 'example';
+            ex.innerHTML = highlightWordInText(d.example, searchedWord || word);
+            card.appendChild(ex);
+          }
+          if (d.synonyms && d.synonyms.length) {
+            const synWrap = document.createElement('div'); synWrap.className = 'syns';
+            d.synonyms.slice(0, 8).forEach(s => {
+              const sEl = document.createElement('div'); sEl.className = 'syn'; sEl.textContent = s;
+              sEl.onclick = () => { input.value = s; performSearch(s); };
+              synWrap.appendChild(sEl);
+            });
+            card.appendChild(synWrap);
+          }
+          if (d.antonyms && d.antonyms.length) {
+            const antWrap = document.createElement('div'); antWrap.style.marginTop = '8px'; antWrap.innerHTML = '<strong>Antonyms:</strong> ' + d.antonyms.slice(0, 6).join(', ');
+            card.appendChild(antWrap);
+          }
+        });
+
+        meanings.appendChild(card);
+      });
+
+      outer.appendChild(left); outer.appendChild(meanings);
+      resultArea.appendChild(outer);
+    }
+
+    /* -----------------------------
+       UI feedback + errors
+       ----------------------------- */
+    function setStatus(txt) { status.textContent = txt || 'Ready'; }
+    function showError(msg) { errorEl.style.display = 'block'; errorEl.textContent = msg; setStatus('Error'); }
+    function clearError() { errorEl.style.display = 'none'; errorEl.textContent = ''; setStatus('Ready'); }
+
+    /* -----------------------------
+       Search flow
+       ----------------------------- */
+    async function performSearch(word) {
+      if (!word) return showError('Please provide a word');
+      clearError();
+      setStatus('Searching...');
+      try {
+        const data = await fetchWord(word);
+        renderResult(data, word);
+        pushHistory(word);
+      } catch (err) {
+        if (err.status === 404) showError(`No results for "${word}".`);
+        else showError(err.message || 'Network error');
+        resultArea.innerHTML = '';
+      } finally { setStatus('Ready'); }
+    }
+
+    /* -----------------------------
+       Export / Import favorites/history
+       ----------------------------- */
+    function exportJSON() {
+      const payload = {
+        history: getHistory(),
+        favorites: getFavs(),
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'dictionary-export-' + (new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')) + '.json';
+      a.click();
+    }
+    importFile.addEventListener('change', (ev) => {
+      const f = ev.target.files[0];
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const obj = JSON.parse(e.target.result);
+          if (obj.history) localStorage.setItem(STORAGE_HISTORY, JSON.stringify(obj.history));
+          if (obj.favorites || obj.favorites) localStorage.setItem(STORAGE_FAVS, JSON.stringify(obj.favorites || obj.favs || {}));
+          alert('Imported successfully');
+          renderHistory();
+        } catch (err) { alert('Invalid file'); }
+      };
+      reader.readAsText(f);
+    });
+
+    /* -----------------------------
+       Events
+       ----------------------------- */
+    input.addEventListener('input', (e) => {
+      const v = e.target.value.trim();
+      showSuggestions(v);
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { suggestions.style.display = 'none'; performSearch(input.value.trim()); }
+      if (e.key === 'ArrowDown') { // focus first suggestion
+        const first = suggestions.querySelector('.sitem');
+        if (first) first.focus();
+      }
+    });
+    searchBtn.addEventListener('click', () => performSearch(input.value.trim()));
+    viewFavs.addEventListener('click', renderFavsModal);
+    exportBtn.addEventListener('click', exportJSON);
+
+    /* -----------------------------
+       Init
+       ----------------------------- */
+    renderHistory();
+
+    /* -----------------------------
+       Register Service Worker for offline cache
+       ----------------------------- */
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(() => {
+        console.log('SW registered');
+      }).catch(err => console.warn('SW failed', err));
+    }
+  </script>
+</body>
+
+</html>

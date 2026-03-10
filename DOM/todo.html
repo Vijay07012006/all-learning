@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO list</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter task......." name="" id="task">
+    <br>
+    <ul id="list"></ul>
+    <button id="btn">Add</button>
+
+    <script>
+        btn.addEventListener('click' ,()=>{
+            let tsk = document.getElementById('task');
+            if(tsk.value.trim()==''){
+                alert("please Enter Task");
+                return;
+            }
+            // let mytask = JSON.parse(localStorage.getItem('task')) || [];
+            let mytask = JSON.parse(sessionStorage.getItem('task')) || [];
+
+            mytask.push(tsk.value);
+            // localStorage.setItem("task",JSON.stringify(mytask));
+            sessionStorage.setItem("task",JSON.stringify(mytask));
+
+            tsk.value ="";
+            window.location.reload();
+        });
+        function show(){
+            let list = document.querySelector('#list');
+            // let task = JSON.parse(localStorage.getItem('task'));
+            let task = JSON.parse(sessionStorage.getItem('task'));
+
+
+            task.forEach((a,i)=>{
+                let l = document.createElement('li');
+                l.innerHTML = `${a} <button onclick="del(${i})">Delete</button>`;
+                list.appendChild(l);
+            });
+        };
+        show();
+
+        function del(a){
+            // let task = JSON.parse(localStorage.getItem('task'));
+            let task = JSON.parse(sessionStorage.getItem('task'));
+
+            task.splice(a,1,);
+            // localStorage.setItem('task',JSON.stringify(task));
+            sessionStorage.setItem('task',JSON.stringify(task));
+
+            // show();
+            window.location.reload();
+        };
+    </script>
+</body>
+</html>

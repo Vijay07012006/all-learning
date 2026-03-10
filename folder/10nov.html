@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // let a = 5;
+        // while(a<20){
+        //     // console.log(a);
+        //     // console.warn(a);
+        //     console.error(a);
+
+        // }
+
+        //Q1. Armstrong or not 
+
+        // let num =parseInt(window.prompt("Enter a number : "));
+        // let temp = num;
+        // let d;
+        // let c=0;
+        // while(temp>0){
+        //     temp=parseInt(temp/10);
+        //     c++;
+        // }
+        // let arm=0;
+        // temp=num;
+        // while(temp>0){
+        //     d=temp%10;
+        //     arm=arm+d**c;
+        //     temp=parseInt(temp/10);
+        // }
+        // if(arm==num){
+        //     console.log("Number is armstrong");
+        // }
+        // else{
+        //     console.log("number is not armstrong");
+
+        // }
+
+        //Q2. reverse the number
+
+        // let n = parseInt(window.prompt("Enter a number : "));
+        // let rev=0;
+        // let d;
+        // while(n>0){
+        //     d=n%10;
+        //     rev=(rev*10)+d;
+        //     n=parseInt(n/10);
+        // }
+        // console.log(rev);
+
+        //Q3. check no is palindrome or not
+
+        // let n = parseInt(window.prompt("Enter a number : "));
+        // let d;
+        // let temp=n;
+        // let rev=0;
+        // while(n>0){
+        //     d=n%10;
+        //     rev=(rev*10)+d;
+        //     n=parseInt(n/10);
+        // }
+        // if(rev==temp){
+        //     console.log("Number is palindrome");
+        // }
+        // else{
+        //     console.log("Number is not palindrome");
+        // }
+
+        //Q4. sqare pattern via nested loop
+
+        // let n = parseInt(window.prompt("Enter a number : "));
+        // let i,j;
+        // for(i=1;i<=n;i++){
+        //     for(j=1;j<=n;j++){
+        //         document.write("* ");
+        //     }
+        //     document.write("<br>");
+        // }
+
+        // Q5. in a given range print even/odd numbers
+
+        // let low = parseInt(window.prompt("Enter lower range : "));
+        // let high = parseInt(window.prompt("Enter higher range : "));
+        // let i;
+        // for(i=low;i<=high;i++){
+        //     if(i%2==0){
+        //         console.log(i+ " Even");
+        //     }
+        // }
+        // for(i=low;i<=high;i++){
+        //     if(i%2!=0){
+        //         console.log(i + " Odd");
+        //     }
+        // }   
+
+
+        // Q6. in a given range print odd & prime numbers
+
+        //    let low = parseInt(window.prompt("Enter lower range: "));
+        //    let high = parseInt(window.prompt("Enter higher range: "));
+
+        //     for (let i = low; i <= high; i++) {
+        //     if (i % 2 !== 0) {  // Check odd
+        //     let isPrime = true;
+
+        //     if (i < 2) isPrime = false;  // numbers < 2 are not prime
+        //     else {
+        //         for (let j = 2; j <= Math.sqrt(i); j++) {  // optimized prime check
+        //             if (i % j === 0) {
+        //                 isPrime = false;
+        //                 break;
+        //             }
+        //         }
+        //     }
+
+        //     if (isPrime) {
+        //         console.log(i + " is odd and prime");
+        //     }
+        //      }
+        //     }
+
+
+        // // Q7. WAP to print fibonacci series upto n terms
+
+        // let terms = parseInt(window.prompt("Enter number of terms : "));
+        // let n1=0 , n2=1 , n3, i;
+        // for(i=0;i<terms;i++){
+        //     n3=n1+n2;
+        //     console.log(n3);
+        //     n1=n2;
+        //     n2=n3;
+        // }
+
+        //Q8. highest digit find  even if number is in negative 
+
+        // let a =parseInt(window.prompt("Enter a number : "));
+        // let h = -9;
+        // let d ;
+        // while(a!=0){
+        //     d=a%10;
+        //     if(d>h){
+        //         h=d;
+        //     }
+        //     a=parseInt(a/10);
+        // }
+        // if(h==-0){
+        //     h=0;
+        //     console.log(h);
+        // }
+        // else{
+        //     console.log(h);
+        // }
+
+
+        //Q9. prime number in given range
+
+        // let low=parseInt(window.prompt("Enter lower range : "));
+        // let high=parseInt(window.prompt("Enter higher range : "));
+        // let i , j , f=0;
+        // for(i=low;i<=high;i++){
+        //     f=0;
+        //     for(j=1;j<=i;j++){
+        //         if(i%j==0){
+        //             f++;
+        //         }
+        //     }
+        //     if(f==2){
+        //         console.log("prime no is : ",i);
+
+        //     }
+        // }
+
+        // // Q10. WAP to find factorials of each number  in given range
+
+        // let low = parseInt(window.prompt("Enter lower range : "));
+        // let high = parseInt(window.prompt("Enter higher range : "));
+        // let i,j;
+        // for(i=low;i<=high;i++){
+        //     let fact=1;
+        //     for(j=1;j<=i;j++){
+        //         fact=fact*j;
+        //     }
+        //     console.log(`Factorial of ${i} is: ${fact}`);
+        // }
+
+        // //Q11. WAP to find palindrome number in a given range
+
+        // let low = parseInt(window.prompt("Enter lower range : "));
+        // let high = parseInt(window.prompt("Enter higher range : "));
+        // let i,num;      
+        // for(i=low;i<=high;i++){
+        //     num=i;
+        //     let rev=0;
+        //   
+        //      while(num>0){
+        //         d=num%10;
+        //         rev=(rev*10)+d;
+        //         num=parseInt(num/10);
+        //     }
+        //     if(i==rev){
+        //         console.log(rev ,"  is palindrome");
+        //     }
+        //     // else{
+        //     //     console.log(rev ," is not a palindrome");
+
+        //     // }
+        //    
+        // }  
+
+        // //Q12.WAP to find perfect number 
+
+        // let num = parseInt(window.prompt("Enter a number: "));
+        // let sum = 0;
+        // for (let i = 1; i < num; i++) {
+        //     if (num % i === 0) {
+        //         sum += i;
+        //     }
+        // }
+        // if (sum === num) {
+        //     console.log(num + " is a Perfect Number");
+        // } else {
+        //     console.log(num + " is not a Perfect Number");
+        // }
+
+        // //Q13. WAP to find even && palindrome no. both in a given range.
+
+        // let low = parseInt(window.prompt("Enter lower range : "));
+        // let high = parseInt(window.prompt("Enter higher range : "));
+        // let i, num, d, rev = 0;
+        // for (i = low; i <= high; i++) {
+        //     num = i;
+        //     let temp = num;
+        //     let rev = 0;
+        //     while (num > 0) {
+        //         d = num % 10;
+        //         rev = (rev * 10) + d;
+        //         num = parseInt(num / 10);
+        //     }
+        //     num = temp;
+        //     if (num % 2 == 0 && num == rev) {
+        //         console.log(i, "is Both even and palindrome");
+        //     }
+        // }
+
+        //Q14. WAP to find strong number in a given range.
+        
+        let low = parseInt(window.prompt("Enter lower range: "));
+        let high = parseInt(window.prompt("Enter higher range: "));
+
+        for (let i = low; i <= high; i++) {
+            let num = i;     
+            let sum = 0;      
+
+            while (num > 0) {
+                let d = num % 10;
+                let fact = 1;      
+
+                for (let j = 1; j <= d; j++) {
+                    fact = fact * j;
+                }
+                sum = sum + fact;
+                num = parseInt(num / 10);
+            }
+            if (sum === i) {
+                console.log(i + " is a strong number");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <script>
+        // (function(){
+        //     console.log("IIFE executed");
+        // })();
+        // (function(a,b){
+        //     let c = a + b;
+        //     console.log("Sum from IIFE: "+c);
+        // })(10,20);
+         
+        // //closure function
+        // function fun(){
+        //     let count = 0;
+        //      function ch(){
+        //         console.log("Count is: "+count);
+        //         count++;
+        //     }   
+        //     ch();
+        //     ch();   
+        //     ch();
+        // }
+        // fun();
+
+        //constructor function
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        //     this.display = function(){
+        //         console.log("Name: "+this.name+" Age: "+this.age);
+        //     }
+        // }
+        // let p1 = new Person("Alice",25);
+        // let p2 = new Person("Bob",30);
+        // p1.display();
+        // p2.display();
+
+        function Person(name,age){
+            this.a = name;
+            this.b = age;
+            console.log(this.a , this.b);
+        }
+        // this.name = "Default";
+        // this.age = 0;
+        // console.log(this.name , this.age);
+
+        let a = new Person("John",28);
+        console.log(a);
+        
+    </script>
+</body>
+</html>

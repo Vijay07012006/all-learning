@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle mode</title>
+
+    <link rel="stylesheet" href="./style.css" id="link">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="outer">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus tempore molestiae magni quia aut quas, a
+        dolorum assumenda sequi. Atque magni nobis deserunt eius quasi minus sunt, aspernatur, consectetur possimus
+        sapiente obcaecati asperiores ad a error ipsa consequatur veritatis corporis.
+    </div>
+    <select id="mode" onchange="fun()">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+
+    <script>
+        function fun() {
+            let link = document.getElementById('link');
+            link.href = './sty.css';
+            console.log(link.href);
+
+            let mode = document.getElementById('mode').value;
+            localStorage.setItem('Theme', mode);
+            if (localStorage.getItem('Theme') == 'light') {
+                let a = document.querySelector('#outer');
+                a.classList.add('bg-white');
+                a.classList.remove('bg-dark');
+            }
+
+            if (localStorage.getItem('Theme') == 'dark') {
+                let a = document.querySelector('#outer');
+                a.classList.add('bg-dark');
+                a.classList.remove('bg-white');
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

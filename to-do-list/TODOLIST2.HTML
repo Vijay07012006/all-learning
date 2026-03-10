@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            width: 60%;
+            height: 80vh;
+            margin: auto;
+            text-align: center;
+            border: 5px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            transition: 0.7s ease-in-out;
+            
+        }
+        #container:hover{
+            /* transform: translateY(10px); */
+            transform: perspective(50px) scale(0.97);
+            
+            box-shadow: 0 0 10px 10px grey;
+        }
+
+        h1 {
+            color: #333;
+            border: white 2px solid;
+            border-radius: 10px;
+            text-decoration-style: wavy;
+            text-decoration: underline;
+        }
+
+        #taskInput {
+            width: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #taskInput:hover {
+            border-color: #031b35;
+            background-color: #e0e0e0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        #taskInput:focus {
+            border-color: #031b35;
+            outline: none;
+            color: rgb(10, 11, 14);
+            background-color: rgb(191, 98, 4);
+            cursor: pointer;
+        }
+
+        #addTaskButton {
+            padding: 10px 20px;
+            background-color: #031b35;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #addTaskButton:hover {
+            background-color: #9db3d5;
+        }
+
+        #addTaskButton:active {
+            background-color: #89a8c9;
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        #addTaskButton:focus {
+            outline: none;
+            box-shadow: 0 0 5px #031b35;
+            background-color: #b2c1d1;
+            transition-delay: transform 0.1s, color 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 600px) {
+            #container {
+                width: 90%;
+                height: auto;
+            }
+
+            #taskInput {
+                width: 80%;
+            }
+
+            #addTaskButton {
+                width: 80%;
+                margin-top: 10px;
+            }
+
+            #clearTasksButton {
+                width: 80%;
+                margin-top: 10px;
+            }
+        }
+
+        #clearTasksButton {
+            padding: 10px 20px;
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #clearTasksButton:hover {
+            background-color: #e74c3c;
+        }
+
+        #clearTasksButton:active {
+            background-color: #d35400;
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        #clearTasksButton:focus {
+            outline: none;
+            box-shadow: 0 0 5px #c0392b;
+            background-color: #b21504;
+            transition-delay: transform 0.1s, color 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+            overflow: auto;
+            max-height: 55vh;
+        }
+
+        /* ==== NAYA PART: Task item styling (delete icon right end) ==== */
+        #taskList li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f9f9f9;
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .task-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .task-text {
+            font-size: 16px;
+            word-break: break-word;
+        }
+
+        .task-text.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .task-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 10px;
+        }
+
+        .task-actions i {
+            cursor: pointer;
+        }
+
+        .task-actions i:hover {
+            transform: scale(1.1);
+        }
+
+        .edit-icon {
+            /* blue-ish */
+            color: #2980b9;
+        }
+
+        .delete-icon {
+            /* red-ish */
+            color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>TODO LIST2</h1>
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+        <button id="addTaskButton">Add Task</button>
+        <button id="clearTasksButton">Clear All Tasks</button>
+        <ul id="taskList">
+        </ul>
+    </div>
+
+    <script>
+        // Saare tasks ko memory me rakhne ke liye array
+        let tasks = [];
+
+        // ===== Local Storage Helpers =====
+        const STORAGE_KEY = 'todoTasks';
+
+        function loadTasksFromStorage() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    tasks = JSON.parse(stored);
+                } catch (e) {
+                    tasks = [];
+                }
+            }
+            renderTasks();
+        }
+
+        function saveTasksToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+        }
+
+        // ===== UI Render karne wali function =====
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = 'task-item';
+
+                // Left side: checkbox + text
+                const leftDiv = document.createElement('div');
+                leftDiv.className = 'task-left';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = task.completed;
+                checkbox.addEventListener('change', () => toggleTaskCompleted(task.id));
+
+                const span = document.createElement('span');
+                span.className = 'task-text';
+                span.textContent = task.text;
+                if (task.completed) {
+                    span.classList.add('completed');
+                }
+
+                leftDiv.appendChild(checkbox);
+                leftDiv.appendChild(span);
+
+                // Right side: edit + delete icons
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'task-actions';
+
+                const editIcon = document.createElement('i');
+                editIcon.className = 'fa-solid fa-pen-to-square edit-icon';
+                editIcon.title = 'Edit Task';
+                editIcon.addEventListener('click', () => editTask(task.id));
+
+                const deleteIcon = document.createElement('i');
+                deleteIcon.className = 'fa-solid fa-trash delete-icon';
+                deleteIcon.title = 'Delete Task';
+                deleteIcon.addEventListener('click', () => deleteTask(task.id));
+
+                actionsDiv.appendChild(editIcon);
+                actionsDiv.appendChild(deleteIcon);
+
+                li.appendChild(leftDiv);
+                li.appendChild(actionsDiv);
+                taskList.appendChild(li);
+            });
+        }
+
+        // ===== Task Add karne wali function =====
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const text = taskInput.value.trim();
+
+            if (text === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            const newTask = {
+                id: Date.now(),          // unique id
+                text: text,              // task ka actual text
+                completed: false         // by default not completed
+            };
+
+            tasks.push(newTask);
+            saveTasksToStorage();
+            renderTasks();
+            taskInput.value = '';
+        }
+
+        // ===== Task Completed toggle (checkbox) =====
+        function toggleTaskCompleted(id) {
+            tasks = tasks.map(task => {
+                if (task.id === id) {
+                    return { ...task, completed: !task.completed };
+                }
+                return task;
+            });
+            saveTasksToStorage();
+            renderTasks();
+        }
+
+        // ===== Task Edit karne wali function =====
+        function editTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+
+            const newText = prompt('Edit your task:', task.text);
+            if (newText === null) {
+                // Cancel dabaya
+                return;
+            }
+
+            const trimmed = newText.trim();
+            if (trimmed === '') {
+                alert('Task cannot be empty.');
+                return;
+            }
+
+            task.text = trimmed;
+            saveTasksToStorage();
+            renderTasks();
+        }
+
+        // ===== Task Delete karne wali function =====
+        function deleteTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            saveTasksToStorage();
+            renderTasks();
+        }
+
+        // ===== Clear All Tasks =====
+        function clearAllTasks() {
+            if (!confirm('Are you sure you want to clear all tasks?')) return;
+            tasks = [];
+            saveTasksToStorage();
+            renderTasks();
+        }
+
+        // ===== Event Listeners: Button + Enter key =====
+        document.addEventListener('DOMContentLoaded', () => {
+            // Page load hote hi localStorage se data load karo
+            loadTasksFromStorage();
+
+            const addBtn = document.getElementById('addTaskButton');
+            const clearBtn = document.getElementById('clearTasksButton');
+            const taskInput = document.getElementById('taskInput');
+
+            addBtn.addEventListener('click', addTask);
+            clearBtn.addEventListener('click', clearAllTasks);
+
+            // Enter press se bhi task add ho
+            taskInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

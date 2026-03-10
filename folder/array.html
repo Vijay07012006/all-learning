@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //Q1.WAP  to print the fibonacci series up to n terms.
+
+        // let n = parseInt(window.prompt("Enter number of terms : "));
+        // let n1=0, n2=1, n3,i;
+        // console.log(n1);
+        // console.log(n2);
+        // for(i=0;i<n-2;i++){
+        //     n3=n1+n2;
+        //     console.log(n3);
+        //     n1=n2;
+        //     n2=n3;
+        // }
+
+        //Q2. WAP to print the factorial in range.
+
+        // let low = parseInt(window.prompt("Enter lower range : "));
+        // let high = parseInt(window.prompt("Enter higher range : "));
+        // let fact=1;
+        // for(let i=low;i<=high;i++){
+        //     let fact = 1;
+        //     for(let j=1; j<=i; j++){
+        //         fact=fact*i;
+        //     }
+        // console.log(`Factorial of ${i} is: ${fact}`);
+        // }
+
+        //Q3. WAP to count the digits in a number.
+
+        // let num = parseInt(window.prompt("Enter a number : "));
+        // let d,c=0;
+        // while(num>0){
+        //     num=parseInt(num/10);
+        //     c++;
+        // }
+        // console.log(c);
+
+        //Q4.WAP to check the palindrome number or not.
+
+        // let num = parseInt(window.prompt("Enter a number : "));
+        // let rev=0, i,temp=num, d;
+        // while(num>0){
+        //     d=num%10;
+        //     rev = (rev*10)+d;
+        //     num=parseInt(num/10);
+        // }
+        // num=temp;
+        // if(temp==rev){
+        //     console.log(num ,"  is palindrome");
+        // }
+        // else{
+        //     console.log(num , "  is not palindrome");
+
+        // }
+
+
+        // let c;
+        // let a = [1,2,3,4,5];     //literal way
+        // let b = new Array(1,2,3,4,5); //object way(constructor way)
+        // console.log(a);
+        // console.log(b);
+        // console.log(Array.isArray(b));
+
+        // let a = [[1,[1,2,3],3],[4,5,6],[7,8,9]];    
+        // console.log(a[0][1][0]);
+
+        // let a = [1,2,3,4,5];
+        // // a.push(6);  //add element at last
+        // // a.pop();    //remove element from last
+        // // a.unshift(0);  //add element at first
+        // // a.shift();     //remove element from first
+
+        // // a.splice(index to start, number of elements to remove, elements to add)
+
+        // // a.splice(2,0,2.5); //add element at specific position
+        // // a.splice(2,1); //remove element from specific position
+        // let b =  a.slice(0,2); //remove and add elements at specific position
+        // console.log(b);
+        // console.log(a);
+
+        // let a = [5,3,8,4,2];
+        // console.log(a.at(-2));     //access element from last using at() method
+        // a.sort();                   //sort the array
+        // console.log(a);
+        // a.reverse();                //reverse the array
+        // console.log(a);
+
+        // let a = [1,2,3,4,5];
+        // // console.log(a.length);  // yaha par length property use hota hai
+        // for(let i=0;i<a.length;i++){
+        //     console.log(a[i]);
+        // }
+
+        // let a = [1,2,3,4,5];
+        // let b = a.map((a)=> a*2);  //map method for iterating and modifying array elements
+        // console.log(b); 
+
+
+        // let a = [1,2,3,4,5];
+        // a.forEach((b) => console.log(b * 2)); //forEach method for iterating array elements
+
+        // let a = [1,2,3,4,5,6,7,8,9,10];
+        // let even = a.filter((a) => a%2==0);  //filter method for filtering array elements based on condition
+        // console.log(even);
+
+
+        // let a = [1,2,3,4,5];
+        // let sum = a.reduce((acc, curr) => acc + curr, 0);  //reduce method for accumulating array elements
+        // console.log(sum);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.find((a) => a > 3);  //find method for finding first element satisfying condition
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.findIndex((a) => a > 3);  //findIndex method for finding index of first element satisfying condition
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.includes(3);  //includes method for checking presence of element
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.join("-");  //join method for converting array to string
+        // console.log(b);
+
+        // let a = "hello";
+        // let b = a.split("");  //split method for converting string to array
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.concat([6,7,8]);  //concat method for merging arrays
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.fill(0,1,4);  //fill method for filling array elements with specific value
+        // console.log(b);
+
+
+        // let a = [1,2,3,4,5];
+        // let b = a.every((a) => a > 0);  //every method for checking if all elements satisfy condition
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.some((a) => a > 4);  //some method for checking if any element satisfies condition
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.reverse();  //reverse method for reversing the array
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.sort((x,y) => y - x);  //custom sorting in descending order
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.flatMap((a) => [a, a * 2]);  //flatMap method for mapping and flattening array
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.at(-1);  //accessing last element using at() method       
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.copyWithin(0,3);  //copyWithin method for copying part of array within itself
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let a = [1, 2, [3, 4], [5, [6, 7]]];
+        // let b = a.flat(Infinity);  //flat method for flattening nested arrays
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.toString();  //toString method for converting array to string
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.values();  //values method for getting array iterator
+        // for(let val of b){
+        //     console.log(val);
+        // }
+
+        // let  a = [1,2,3,4,5];
+        // let b = a.entries();  //entries method for getting array iterator with key-value pairs
+        // for(let val of b){
+        //     console.log(val);
+        //  }
+
+        // let a = [1,2,3,4,5];
+        // let b = a.keys();  //keys method for getting array iterator with keys
+        // for(let key of b){
+        //     console.log(key);
+        // }
+
+        // let a = [1,2,3,4,5];
+        // let b = a.findLast((a) => a % 2 == 0);  //findLast method for finding last element satisfying condition
+        // console.log(b);
+
+        // let a = [1,2,3,4,5];
+        // let b = a.findLastIndex((a) => a % 2 == 0);  //findLastIndex method for finding index of last element satisfying condition
+        // console.log(b);
+
+
+
+
+
+
+
+
+
+
+
+
+        //QUESTION BANK PRACTICE
+        let name = prompt("Apna naam likho:");
+        name = name.trim(); // extra space hata do
+
+        let parts = name.split(" "); // naam ko space ke basis pe tod do
+
+        if (parts.length === 1) {
+            // agar sirf ek naam hai
+            console.log(parts[0]);
+        }
+        else if (parts.length === 2) {
+            // agar do naam hai
+            let first = parts[0][0].toUpperCase(); // pehla letter bada
+            let last = parts[1].toLowerCase(); // last naam chhota
+            console.log(first + "." + last);
+        }
+        else if (parts.length > 2) {
+            // agar teen ya usse zyada naam hai
+            let result = "";
+            for (let i = 0; i < parts.length - 1; i++) {
+                result += parts[i][0].toUpperCase() + ".";  // har naam ka pehla letter bada aur dot lagao
+            }
+            result += parts[parts.length - 1].toLowerCase(); // last naam full
+            console.log(result);
+        }
+        else {
+            console.log("Sahi naam likho!");
+        }
+
+
+        // function greet(name) {
+        //     console.log("Hello, " + name + "!");
+        // }
+        // greet("Vijay");  
+
+    </script>
+</body>
+
+</html>

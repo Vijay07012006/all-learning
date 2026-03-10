@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        // priority : normal log > microtask > macrotask
+
+        console.log("a"); //Normal print
+
+        setTimeout(() => {  // macrotask queue 
+            console.log("100");
+        }, 1000)                                                                                                                           
+        const a = new Promise((res, rej) => {   // microtask queue
+            res();
+        });
+        a.then(() => {
+            setTimeout(() => {
+                console.log("1");
+            }, 1000)
+        })
+        a.then(() => {
+            setTimeout(() => {
+                console.log("2");
+            }, 1000)
+        })
+        a.then(() => {
+            setTimeout(() => {
+                console.log("3");
+            }, 1000)
+        })
+
+        a.catch(() => {
+            console.log("resolve nahi hui hai");
+
+        })
+    </script>
+</body>
+
+</html>

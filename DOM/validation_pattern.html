@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Pattern</title>
+</head>
+<body>
+    
+    <input type="text" placeholder="Enter name" id="name">
+    <span id="nmer"></span>
+    <br>
+    <input type="text" placeholder="Enter Email" id="Email">
+    <span id="malep"></span>
+    <br>
+    <input type="number" placeholder="Enter number" id="number" >
+    <span id="noer"></span>
+    <br>
+    <button type="submit" onclick="ch()">Submit</button>
+
+    <script>
+        function ch(){
+            let name = document.getElementById("name").value;
+            let number = document.getElementById("number").value;
+            let Email = document.getElementById("Email").value;
+
+
+            let namePattern = /^[A-Za-z\s]+$/;
+            let numberPattern = /^\d{10}$/;
+			let mailp = /^[a-zA-Z._]+\@+[a-zA-Z]+\.+[a-zA-Z0-9]{2,}$/;
+
+            if(!namePattern.test(name)){
+                alert("Invalid name. Only letters and spaces are allowed.");
+                document.getElementById("nmer").innerHTML="Invalid name format";
+                document.getElementById("nmer").style.color="red";
+                document.getElementById("name").style.border="2px solid red";
+            }
+            if(!mailp.test(Email)){
+                alert("Invalid Email");
+                document.getElementById("mailp").innerHTML="Invalid Email format";
+                document.getElementById("mailp").style.color="red";
+                document.getElementById("Email").style.border="2px solid red";
+                
+            }
+
+            if(!numberPattern.test(number)){
+                alert("Invalid number. It must be exactly 10 digits.");
+                document.getElementById("noer").innerHTML="Invalid number format";
+                document.getElementById("noer").style.color="red";
+                document.getElementById("number").style.border="2px solid red";
+            }
+        }
+    </script>
+
+</body>
+</html>

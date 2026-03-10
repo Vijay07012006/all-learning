@@ -1,0 +1,65 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+#box {
+    height: 500px;
+    width: 500px;
+    border: 2px solid rgb(219, 79, 79);
+    background-color: rgb(227, 232, 234);
+    box-shadow: 0px 0px 10px 10px rgb(243, 241, 241);
+    margin: 100px auto;
+    border-radius: 50px;
+    text-align: center;
+}
+
+#box input {
+    height: 45px;
+    width: 280px;
+    margin-top: 50px;
+    border-radius: 30px;
+    background-color: #fff;
+    border: 0;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 17px;
+    color: black;
+}
+
+/* #box input:hover{
+    transform: rotateY(20deg);
+} */
+#box button {
+    height: 45px;
+    width: 100px;
+    margin-top: 40px;
+    border-radius: 30px;
+    background-color: #fff;
+    border: 0;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#cn {
+    color: red;
+}
+
+#temp {
+    color: red;
+}
+
+#windspeed {
+    color: red;
+}
+
+#humidity {
+    color: red;
+}
+#img-data{
+    height: 200px;
+    width: 200px;
+
+}

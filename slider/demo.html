@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Slider</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <style>
+        body {
+            background-color: red;
+        }
+
+        .slider {
+            height: 400px;
+            width: 800px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid red;
+            margin: 100px auto;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden; /* bahar nikla part hide */
+        }
+
+        /* har slide ek dusre ke upar stacked */
+        .slider .item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateX(100%); /* default: right ke bahar */
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+        }
+
+        .slider .item img {
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* jo slide visible hai */
+        .slider .item.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        /* current slide NEXT pe jaate time left ki side nikal jaaye */
+        .slider .item.to-left {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* next slide NEXT pe right se andar aaye */
+        .slider .item.from-right {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* current slide PREVIOUS pe right ki side nikal jaaye */
+        .slider .item.to-right {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        /* previous slide PREVIOUS pe left se andar aaye */
+        .slider .item.from-left {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* buttons */
+        #pre {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100px;
+            background-color: green;
+            color: white;
+            font-weight: 1000;
+            border-radius: 30px;
+            padding: 5px;
+            z-index: 3;
+            transform: translateY(-50%);
+        }
+
+        #pre:hover {
+            background-color: red;
+        }
+
+        #nxt {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 100px;
+            background-color: green;
+            color: white;
+            font-weight: 1000;
+            border-radius: 30px;
+            padding: 5px;
+            z-index: 3;
+            transform: translateY(-50%);
+        }
+
+        #nxt:hover {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="item active">
+            <img src="./images/ecom.png" alt="">
+        </div>
+        <div class="item">
+            <img src="./images/movies.png" alt="">
+        </div>
+        <div class="item">
+            <img src="./images/pf1.png" alt="">
+        </div>
+        <div class="item">
+            <img src="./images/pf2.png" alt="">
+        </div>
+        <div class="item">
+            <img src="./images/plants.png" alt="">
+        </div>
+        <div class="item">
+            <img src="./images/portfolio.png" alt="">
+        </div>
+
+        <button id="pre">Previous</button>
+        <button id="nxt">Next</button>
+    </div>
+
+    <script src="js/bootstrap.bundle.js"></script>
+
+    <script>
+        const slides = document.querySelectorAll('.item');
+        const pre = document.querySelector('#pre');
+        const nxt = document.querySelector('#nxt');
+
+        let i = 0; // current index
+
+        // saari extra classes remove karne ke liye
+        const resetAnimClasses = () => {
+            slides.forEach(slide => {
+                slide.classList.remove('to-left', 'to-right', 'from-left', 'from-right');
+            });
+        };
+
+        // NEXT waala move
+        const goNext = () => {
+            let current = slides[i];
+            let nextIndex = (i + 1) % slides.length;
+            let next = slides[nextIndex];
+
+            resetAnimClasses();
+
+            // next ko pehle active karo (taaki visible ho)
+            next.classList.add('active');
+
+            // current → left ki taraf slide out
+            current.classList.add('to-left');
+
+            // next → right se slide-in
+            next.classList.add('from-right');
+
+            // transition khatam hone ke baad current ko active se hatao
+            const handler = () => {
+                current.classList.remove('active', 'to-left');
+                current.removeEventListener('transitionend', handler);
+            };
+            current.addEventListener('transitionend', handler);
+
+            i = nextIndex;
+        };
+
+        // PREVIOUS waala move
+        const goPrev = () => {
+            let current = slides[i];
+            let prevIndex = (i - 1 + slides.length) % slides.length;
+            let prev = slides[prevIndex];
+
+            resetAnimClasses();
+
+            // prev ko visible karo
+            prev.classList.add('active');
+
+            // current → right ki taraf slide out
+            current.classList.add('to-right');
+
+            // prev → left se slide-in
+            prev.classList.add('from-left');
+
+            const handler = () => {
+                current.classList.remove('active', 'to-right');
+                current.removeEventListener('transitionend', handler);
+            };
+            current.addEventListener('transitionend', handler);
+
+            i = prevIndex;
+        };
+        nxt.onclick = () => {
+            goNext();
+        };
+
+        pre.onclick = () => {
+            goPrev();
+        };
+
+        let auto = setInterval(goNext, 3000);
+        const slider = document.querySelector('.slider');
+        slider.onmouseover = () => clearInterval(auto);
+        slider.onmouseout = () => auto = setInterval(goNext, 3000);
+    </script>
+</body>
+
+</html>

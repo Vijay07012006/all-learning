@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dictionary</title>
+</head>
+<style>
+    body {
+        background-color: black;
+    }
+
+    .box {
+        height: 650px;
+        width: 600px;
+        border: 10px solid rgb(249, 246, 246);
+        margin: 100px 0 0 30%;
+        /* text-align: center; */
+        /* justify-content: center; */
+        background-color: skyblue;
+        box-sizing: border-box;
+        border-radius: 30px;
+    }
+    #h{
+        text-align: center;
+        justify-content: center;
+        box-sizing: border-box;
+        margin-top: 30px;
+        text-transform: uppercase;
+        color: blue;
+    }
+    .inp {
+        height: 50px;
+        width: 60%;
+        margin: 50px 0 0 10%;
+        border-radius: 30px;
+        border: 0;
+        padding-left: 10px;
+        box-sizing: border-box;
+        font-size: 20px;
+    }
+    .inp:hover{
+        background: linear-gradient(to right , rgb(233, 159, 10));
+        color: white;
+    }
+    .btn {
+        height: 50px;
+        width: 120px;
+        color: white;
+        background-color: green;
+        border: 0;
+        border-radius: 30px;
+        font-size: 18px;
+        transition: 0.3s ease-in-out;
+    }
+    .btn:hover{
+        background-color: #e3560b;
+        color: black;
+    }
+
+    .response-data {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 25px;
+        color: red;
+        box-sizing: border-box;
+        padding:20px ;
+    }
+    #meaning-of-word{
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: center;
+        /* transition: 0.5s ease; */
+    }
+    
+</style>
+
+<body>
+
+    <div class="box">
+        <h1 id="h">Dictionay App</h1>
+        <input class="inp" id="Search-word" type="text" placeholder="Search word...">
+        <button class="btn" onclick="ch()">Click</button>
+
+        <div class="response-data">
+            <p id="meaning-of-word"></p>
+            <!-- <p id="synonyms"></p> -->
+             <p id=""></p>
+        </div>
+    </div>
+    <script>
+        async function ch() {
+            let a = document.getElementById("Search-word").value;
+            const url = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${a}`);
+            const wo = await url.json();
+            const meaning = wo[0].meanings[0].definitions[0].definition;
+            document.getElementById("meaning-of-word").innerHTML=meaning;
+        }   
+    </script>
+</body>
+
+</html>

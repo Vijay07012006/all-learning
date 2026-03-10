@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #header{
+            height: 100px;
+            width: 100%;
+            background-color: red;
+
+        }
+        #box{
+            height: 1000px;
+            width: 100%;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <div id="header">
+
+    </div>
+    <div id="box">
+
+    </div>
+    <script>
+        let header = document.getElementById('header');
+        let body= document.getElementById("body");
+        window.addEventListener('scroll',()=>{
+        let a = window.scrollY;
+            console.log(a);
+            if(a>100){
+                header.style.position = 'sticky';
+                header.style.top='0px';
+                header.style.backgroundColor='yellow';
+                header.style.transition="0.1s ease-in-out"
+            }
+            else if(a<80){
+                header.style.backgroundColor='red';
+                header.style.transition="0.1s ease-in-out"
+            }
+        })
+        
+    </script>
+</body>
+</html>

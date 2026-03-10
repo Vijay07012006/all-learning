@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Smart Dictionary</title>
+
+    <!-- Google font (optional) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg1: #0f1724;
+            --bg2: #0b1220;
+            --card: rgba(255, 255, 255, 0.06);
+            --accent: linear-gradient(90deg, #06b6d4, #7c3aed);
+            --glass: rgba(255, 255, 255, 0.04);
+            --muted: #aab0c0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: radial-gradient(1200px 600px at 10% 10%, #071126 0%, transparent 10%), linear-gradient(180deg, var(--bg1), var(--bg2));
+            color: #e6eef8;
+        }
+
+        .wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 760px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(6px);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: white;
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.18);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 0.4px;
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            align-items: center;
+        }
+
+        .search {
+            flex: 1;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: var(--glass);
+            padding: 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .search input {
+            flex: 1;
+            height: 46px;
+            border: 0;
+            outline: 0;
+            padding: 0 12px;
+            background: transparent;
+            color: inherit;
+            font-size: 16px;
+        }
+
+        .search input::placeholder {
+            color: #99a3b6;
+        }
+
+        button.btn {
+            height: 44px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 0;
+            cursor: pointer;
+            background: linear-gradient(90deg, #06b6d4, #7c3aed);
+            color: white;
+            font-weight: 600;
+            transition: transform .12s ease;
+        }
+
+        button.btn:active {
+            transform: scale(.98);
+        }
+
+        .meta {
+            display: flex;
+            gap: 8px;
+            margin-left: 8px;
+            align-items: center;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            color: var(--muted);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        /* results */
+        .result {
+            margin-top: 18px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .left {
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .word {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .phonetic {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .play {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .fave {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .meanings {
+            flex: 1;
+            background: transparent;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .meaning-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .pos-badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 13px;
+            background: rgba(124, 58, 237, 0.12);
+            color: #d7c7ff;
+            margin-bottom: 8px;
+        }
+
+        .definition {
+            margin: 6px 0;
+            font-size: 16px;
+            color: #f3f6fb;
+        }
+
+        .example {
+            margin: 6px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .syns {
+            margin-top: 8px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .syn {
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 8px;
+            border-radius: 8px;
+            color: #cfe9ff;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            cursor: default;
+        }
+
+        .small {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        /* spinner */
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.06);
+            border-top-color: #7c3aed;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* history */
+        .history {
+            margin-top: 18px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hist-item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .error {
+            color: var(--danger);
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        /* responsive */
+        @media (max-width:720px) {
+            .card {
+                padding: 16px;
+            }
+
+            .word {
+                font-size: 22px;
+            }
+
+            .left {
+                min-width: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <main class="card" role="main" aria-labelledby="title">
+            <header>
+                <div class="logo" aria-hidden>Dic</div>
+                <div>
+                    <h1 id="title">Smart Dictionary</h1>
+                    <p class="lead">Type a word — dekho meanings, pronunciation, examples & synonyms.</p>
+                </div>
+            </header>
+
+            <div class="controls" aria-hidden="false">
+                <div class="search" role="search" aria-label="Search dictionary">
+                    <input id="searchInput" type="search" placeholder="Type a word and press Enter..."
+                        aria-label="Word to look up" autocomplete="off" />
+                    <div id="loading" style="display:none;" aria-hidden="true">
+                        <div class="spinner" title="Loading"></div>
+                    </div>
+                </div>
+
+                <div class="meta">
+                    <button id="searchBtn" class="btn" title="Search">Search</button>
+                    <div class="chip" id="statusChip">Ready</div>
+                </div>
+            </div>
+
+            <section id="resultArea" aria-live="polite" style="min-height:120px; margin-top:14px;">
+                <!-- results injected here -->
+            </section>
+
+            <div class="small">Recent searches:</div>
+            <div id="history" class="history" aria-label="Search history"></div>
+            <div id="errorMsg" class="error" role="alert" style="display:none"></div>
+        </main>
+    </div>
+
+    <script>
+        // ---------- Utility helpers ----------
+        const $ = (id) => document.getElementById(id);
+        const API_BASE = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+        const loadingEl = $('loading');
+        const statusChip = $('statusChip');
+        const resultArea = $('resultArea');
+        const errorMsg = $('errorMsg');
+        const historyEl = $('history');
+        const STORAGE_KEY = 'dic_history_v1';
+        const FAV_KEY = 'dic_favs_v1';
+
+        // debounce helper
+        function debounce(fn, wait) {
+            let t;
+            return (...args) => {
+                clearTimeout(t);
+                t = setTimeout(() => fn.apply(this, args), wait);
+            };
+        }
+
+        // show/hide loading
+        function setLoading(on) {
+            loadingEl.style.display = on ? 'block' : 'none';
+            statusChip.textContent = on ? 'Searching...' : 'Ready';
+        }
+
+        // save to history (no duplicates, most recent first)
+        function pushHistory(word) {
+            if (!word) return;
+            let arr = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            arr = arr.filter(w => w.toLowerCase() !== word.toLowerCase());
+            arr.unshift(word);
+            if (arr.length > 12) arr = arr.slice(0, 12);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const arr = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            historyEl.innerHTML = '';
+            arr.forEach(w => {
+                const btn = document.createElement('button');
+                btn.className = 'hist-item';
+                btn.textContent = w;
+                btn.title = 'Search "' + w + '"';
+                btn.onclick = () => doSearch(w);
+                historyEl.appendChild(btn);
+            });
+        }
+
+        // Favorites (simple toggle)
+        function toggleFav(word, data) {
+            let favs = JSON.parse(localStorage.getItem(FAV_KEY) || '{}');
+            if (favs[word]) delete favs[word];
+            else favs[word] = data;
+            localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+            // re-render to update icon states if necessary
+        }
+
+        function formatPhonetics(phonetics) {
+            if (!phonetics || phonetics.length === 0) return '';
+            // prefer text phonetic
+            const p = phonetics.find(p => p.text)?.text || phonetics[0].text || '';
+            return p;
+        }
+
+        // ---------- Core search ----------
+        async function fetchWord(word) {
+            if (!word) throw new Error('Empty word');
+            const res = await fetch(API_BASE + encodeURIComponent(word));
+            if (!res.ok) {
+                // dictionaryapi returns 404 with json message when not found
+                const err = await res.json().catch(() => ({ message: 'Not found' }));
+                const msg = err.message || 'Failed to load';
+                const e = new Error(msg);
+                e.status = res.status;
+                throw e;
+            }
+            const data = await res.json();
+            return data;
+        }
+
+        // render full response (multiple meanings)
+        function renderResult(data, word) {
+            // data is an array; take first entry as main
+            const entry = data[0];
+            const phoneticText = formatPhonetics(entry.phonetics || []);
+            const audioUrl = (entry.phonetics || []).find(p => p.audio)?.audio || '';
+
+            // left column
+            const left = document.createElement('div');
+            left.className = 'left';
+            const wordEl = document.createElement('div');
+            wordEl.className = 'word';
+            wordEl.innerHTML = `<span>${entry.word}</span>`;
+            const metaRow = document.createElement('div');
+            metaRow.style.display = 'flex'; metaRow.style.gap = '8px'; metaRow.style.alignItems = 'center';
+
+            const phon = document.createElement('div');
+            phon.className = 'phonetic';
+            phon.textContent = phoneticText;
+
+            // audio play
+            const playBtn = document.createElement('button');
+            playBtn.className = 'play';
+            playBtn.title = 'Play pronunciation';
+            playBtn.innerHTML = '🔊';
+            playBtn.onclick = () => {
+                if (!audioUrl) return;
+                const a = new Audio(audioUrl);
+                a.play().catch(() => console.log('audio play failed'));
+            };
+
+            // favourite
+            const favBtn = document.createElement('button');
+            favBtn.className = 'fave';
+            favBtn.title = 'Toggle favorite';
+            favBtn.innerHTML = '★';
+            favBtn.onclick = () => toggleFav(entry.word, entry);
+
+            metaRow.appendChild(phon);
+            metaRow.appendChild(playBtn);
+            metaRow.appendChild(favBtn);
+
+            wordEl.appendChild(metaRow);
+            left.appendChild(wordEl);
+
+            // meanings column
+            const meaningsCol = document.createElement('div');
+            meaningsCol.className = 'meanings';
+
+            (entry.meanings || []).forEach(meaning => {
+                const card = document.createElement('div');
+                card.className = 'meaning-card';
+                const pos = document.createElement('div');
+                pos.className = 'pos-badge';
+                pos.textContent = meaning.partOfSpeech || '—';
+                card.appendChild(pos);
+
+                (meaning.definitions || []).forEach((defObj, i) => {
+                    const def = document.createElement('div');
+                    def.className = 'definition';
+                    def.textContent = `${i + 1}. ${defObj.definition || ''}`;
+                    card.appendChild(def);
+                    if (defObj.example) {
+                        const ex = document.createElement('div');
+                        ex.className = 'example';
+                        ex.textContent = `“${defObj.example}”`;
+                        card.appendChild(ex);
+                    }
+                    if (defObj.synonyms && defObj.synonyms.length) {
+                        const synWrap = document.createElement('div');
+                        synWrap.className = 'syns';
+                        defObj.synonyms.slice(0, 8).forEach(s => {
+                            const sEl = document.createElement('div');
+                            sEl.className = 'syn';
+                            sEl.textContent = s;
+                            synWrap.appendChild(sEl);
+                        });
+                        card.appendChild(synWrap);
+                    }
+                });
+
+                meaningsCol.appendChild(card);
+            });
+
+            // final layout injection
+            resultArea.innerHTML = '';
+            const outer = document.createElement('div');
+            outer.className = 'result';
+            outer.appendChild(left);
+            outer.appendChild(meaningsCol);
+            resultArea.appendChild(outer);
+        }
+
+        async function doSearch(rawWord) {
+            const word = (rawWord || $('searchInput').value || '').trim();
+            if (!word) {
+                showError('Please enter a word to search.');
+                return;
+            }
+            clearError();
+            setLoading(true);
+            try {
+                const data = await fetchWord(word);
+                renderResult(data, word);
+                pushHistory(word);
+            } catch (err) {
+                // show friendly message
+                if (err.status === 404) showError(`No results for "${word}". Check spelling.`);
+                else showError(err.message || 'An error occurred. Please try again.');
+                resultArea.innerHTML = '';
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // UI helpers
+        function showError(msg) {
+            errorMsg.style.display = 'block';
+            errorMsg.textContent = msg;
+            statusChip.textContent = 'Error';
+        }
+        function clearError() {
+            errorMsg.style.display = 'none';
+            errorMsg.textContent = '';
+            statusChip.textContent = 'Ready';
+        }
+
+        // Attach events
+        $('searchBtn').addEventListener('click', () => doSearch());
+        $('searchInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') doSearch();
+        });
+
+        // Debounced live-search suggestion (calls only when user stops typing)
+        $('searchInput').addEventListener('input', debounce((e) => {
+            // we only update status; to keep it simple we don't call API automatically
+            const val = e.target.value.trim();
+            if (val) statusChip.textContent = 'Type Enter to search';
+            else statusChip.textContent = 'Ready';
+        }, 350));
+
+        // initial render
+        renderHistory();
+
+        // expose for debugging (optional)
+        window.doSearch = doSearch;
+    </script>
+</body>
+
+</html>
